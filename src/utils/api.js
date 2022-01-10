@@ -9,3 +9,13 @@ export const getTopics = () => {
     return res.data.topics;
   });
 };
+
+export const getArticles = (topic) => {
+  let path = "/articles";
+  if (topic) {
+    path += `?topic=${topic}`;
+  }
+  return newsRnApi.get(path).then((res) => {
+    return res.data.articles;
+  });
+};

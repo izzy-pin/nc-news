@@ -1,7 +1,8 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import DateBar from "./components/DateBar";
 import Nav from "./components/Nav";
+import ArticlesList from "./components/ArticlesList";
 
 function App() {
   return (
@@ -9,7 +10,11 @@ function App() {
       <div className="App">
         <Nav />
         <DateBar />
-        <p> nothing here yet</p>
+        <Routes>
+          <Route path="/" element={<ArticlesList />} />
+          <Route path="/articles" element={<ArticlesList />} />
+          <Route path="/topics/:topic" element={<ArticlesList />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );
