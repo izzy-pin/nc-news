@@ -1,8 +1,24 @@
+/* body {
+  background-color: #fffff5;
+} */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
   min-height: 100vh;
-  display: grid;
-  grid-template-rows: min-content min-content auto;
+  /* display: grid;
+  grid-template-rows: min-content min-content auto min-content; */
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex-grow: 1;
 }
 
 .Nav {
@@ -19,7 +35,10 @@
 }
 
 .NavLink,
-.NavLink:visited {
+.NavLink:visited,
+.ArticleCard__Link,
+.ArticleCard__Link:active,
+.ArticleCard__Link:visited {
   color: inherit;
   text-decoration: none;
 }
@@ -69,8 +88,27 @@
   justify-content: space-between;
 }
 
+.SingleArticle__main {
+  background-color: #fffff5;
+  padding: 0 20px;
+}
+
+.SingleArticle__topic,
+.SingleArticle__body {
+  text-align: left;
+}
+
+.SingleArticle__topic,
+.SingleArticle__author {
+  font-weight: bold;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+footer {
+  padding-bottom: 10px;
 }
 
 @media screen and (min-width: 600px) {

@@ -19,3 +19,9 @@ export const getArticles = (topic) => {
     return res.data.articles;
   });
 };
+
+export const getArticleByArticleId = (id) => {
+  return newsRnApi.get(`/articles/${id}`).then((res) => {
+    return res.data.article;
+  });
+};
