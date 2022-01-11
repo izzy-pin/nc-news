@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getTopics } from "../utils/api";
+import { getTopics } from "../../utils/api";
 import NavBarLink from "./NavBarLink";
 
 const Nav = () => {

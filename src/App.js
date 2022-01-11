@@ -1,15 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import DateBar from "./components/DateBar";
-import Nav from "./components/Nav";
 import ArticlesList from "./components/ArticlesList";
+import Header from "./components/header/Header";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav />
-        <DateBar />
+        <Header />
         <Routes>
           <Route path="/" element={<ArticlesList />} />
           <Route path="/articles" element={<ArticlesList />} />
