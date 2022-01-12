@@ -25,3 +25,27 @@ export const getArticleByArticleId = (id) => {
     return res.data.article;
   });
 };
+
+export const getComments = (id) => {
+  return newsRnApi.get(`/articles/${id}/comments`).then((res) => {
+    return res.data.comments;
+  });
+};
+
+export const patchArticleVote = (id, inc) => {
+  return newsRnApi.patch(`/articles/${id}`, { inc_votes: inc }).then((res) => {
+    return res.data.article;
+  });
+};
+
+export const patchCommentVote = (id, inc) => {
+  return newsRnApi.patch(`/comments/${id}`, { inc_votes: inc }).then((res) => {
+    return res.data.comment;
+  });
+};
+
+export const getUserByUsername = (username) => {
+  return newsRnApi.get(`/users/${username}`).then((res) => {
+    return res.data.user;
+  });
+};

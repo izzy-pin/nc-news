@@ -68,7 +68,7 @@ main {
   border-top: 1px solid whitesmoke;
 }
 
-.ArticleList {
+ul {
   list-style-type: none;
   padding: 0;
 }
@@ -90,7 +90,7 @@ main {
 
 .SingleArticle__main {
   background-color: #fffff5;
-  padding: 0 20px;
+  padding: 0 20px 20px;
 }
 
 .SingleArticle__topic,
@@ -101,6 +101,44 @@ main {
 .SingleArticle__topic,
 .SingleArticle__author {
   font-weight: bold;
+}
+
+.Like__button,
+.Dislike__button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.Like__button:hover {
+  color: green;
+}
+
+.Dislike__button:hover {
+  color: red;
+}
+
+.CommentCard__li {
+  text-align: left;
+  border-top: 1px solid grey;
+  background-color: #fffff5;
+  padding: 0 15px 10px;
+}
+
+.CommentCard__userDiv {
+  display: flex;
+  align-items: center;
+}
+
+.CommentCard__infoDiv {
+  padding: 0 0 0 15px;
+}
+
+.UserComment__img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid grey;
 }
 
 .App-link {
