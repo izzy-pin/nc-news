@@ -11,7 +11,7 @@ const ArticleCard = ({ article }) => {
   const formattedDate = createdDate.toLocaleDateString("en-uk", options);
 
   return (
-    <li key={article.article_id} className="ArticleCard">
+    <li className="ArticleCard">
       <Link
         to={`/articles/${article.article_id}`}
         className="ArticleCard__Link"
@@ -22,8 +22,8 @@ const ArticleCard = ({ article }) => {
         <div className="ArticleCard-Div">
           <span>{formattedDate} </span>
           <span>
-            Comments: {article.comment_count} <i className="far fa-star"></i>:{" "}
-            {article.votes}
+            Comments: {article.comment_count}{" "}
+            <i className="far fa-thumbs-up"></i> {article.votes}
           </span>
         </div>
       </Link>

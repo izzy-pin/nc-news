@@ -18,9 +18,8 @@ const ArticlesList = () => {
       .then((articlesFromApi) => {
         setIsLoading(false);
         setArticles(articlesFromApi);
-        //error handling!!!
       })
-      .catch((err) => {
+      .catch(() => {
         setIsLoading(false);
         setIsError(true);
       });
@@ -35,9 +34,9 @@ const ArticlesList = () => {
         <p>Sorry, there was an error</p>
       ) : (
         <ul className="ArticleList">
-          {articles.map((article) => {
-            return <ArticleCard article={article} />;
-          })}
+          {articles.map((article) => (
+            <ArticleCard key={article.article_id} article={article} />
+          ))}
         </ul>
       )}
     </main>
