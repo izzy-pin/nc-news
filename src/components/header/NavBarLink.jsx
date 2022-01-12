@@ -8,7 +8,6 @@ const NavBarLink = ({ topic }) => {
           : "NavLink--Topics NavLink"
       }
       to={`/topics/${topic.slug}`}
-      key={topic.slug}
     >
       {topic.slug}
     </NavLink>

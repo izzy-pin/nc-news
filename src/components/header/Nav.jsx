@@ -40,9 +40,7 @@ const Nav = () => {
         ) : isError ? (
           <span>sorry, an error has occured</span>
         ) : (
-          topics.map((topic) => {
-            return <NavBarLink topic={topic} />;
-          })
+          topics.map((topic) => <NavBarLink key={topic.slug} topic={topic} />)
         )}
       </div>
     </nav>
