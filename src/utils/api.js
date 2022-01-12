@@ -20,32 +20,44 @@ export const getArticles = (topic) => {
   });
 };
 
-export const getArticleByArticleId = (id) => {
-  return newsRnApi.get(`/articles/${id}`).then((res) => {
+export const getArticleByArticleId = (article_id) => {
+  return newsRnApi.get(`/articles/${article_id}`).then((res) => {
     return res.data.article;
   });
 };
 
-export const getComments = (id) => {
-  return newsRnApi.get(`/articles/${id}/comments`).then((res) => {
+export const getComments = (article_id) => {
+  return newsRnApi.get(`/articles/${article_id}/comments`).then((res) => {
     return res.data.comments;
   });
 };
 
-export const patchArticleVote = (id, inc) => {
-  return newsRnApi.patch(`/articles/${id}`, { inc_votes: inc }).then((res) => {
-    return res.data.article;
-  });
+export const patchArticleVote = (article_id, inc) => {
+  return newsRnApi
+    .patch(`/articles/${article_id}`, { inc_votes: inc })
+    .then((res) => {
+      return res.data.article;
+    });
 };
 
-export const patchCommentVote = (id, inc) => {
-  return newsRnApi.patch(`/comments/${id}`, { inc_votes: inc }).then((res) => {
-    return res.data.comment;
-  });
+export const patchCommentVote = (comment_id, inc) => {
+  return newsRnApi
+    .patch(`/comments/${comment_id}`, { inc_votes: inc })
+    .then((res) => {
+      return res.data.comment;
+    });
 };
 
 export const getUserByUsername = (username) => {
   return newsRnApi.get(`/users/${username}`).then((res) => {
     return res.data.user;
   });
+};
+
+export const postComment = (article_id, data) => {
+  return newsRnApi
+    .post(`/articles/${article_id}/comments`, data)
+    .then((res) => {
+      return res.data.comment;
+    });
 };

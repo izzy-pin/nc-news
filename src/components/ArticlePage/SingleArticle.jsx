@@ -1,8 +1,11 @@
 import CommentList from "./Comment/CommentList";
 import ArticleVotes from "./ArticleVotes";
+import PostComment from "./Comment/PostComment";
+import { useState } from "react";
 
 const SingleArticle = ({ article }) => {
   const createdDate = new Date(article.created_at);
+  const [comments, setComments] = useState([]);
 
   return (
     <main className="SingleArticle__main">
@@ -17,10 +20,9 @@ const SingleArticle = ({ article }) => {
           <ArticleVotes article={article} />
         </div>
       </article>
-      {
-        //post comments
-      }
-      <CommentList />
+
+      <PostComment article_id={article.article_id} setComments={setComments} />
+      <CommentList comments={comments} setComments={setComments} />
     </main>
   );
 };
