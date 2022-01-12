@@ -1,3 +1,6 @@
+import CommentList from "./Comment/CommentList";
+import ArticleVotes from "./ArticleVotes";
+
 const SingleArticle = ({ article }) => {
   const createdDate = new Date(article.created_at);
 
@@ -11,12 +14,13 @@ const SingleArticle = ({ article }) => {
         <p className="SingleArticle__body">{article.body}</p>
         <div className="CommentVote__Div">
           <span>Comments: {article.comment_count}</span>{" "}
-          <span>
-            {" "}
-            <i className="far fa-star"></i>: {article.votes}
-          </span>
+          <ArticleVotes article={article} />
         </div>
       </article>
+      {
+        //post comments
+      }
+      <CommentList />
     </main>
   );
 };
