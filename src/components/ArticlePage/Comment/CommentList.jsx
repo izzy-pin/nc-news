@@ -7,6 +7,7 @@ const CommentList = ({ comments, setComments }) => {
   const { article_id } = useParams();
 
   const [isError, setIsError] = useState(false);
+  const [error, setError] = useState({ status: undefined, msg: "error" });
   const [isLoading, setIsLoading] = useState(false);
   const [deletedComment, setDeletedComment] = useState(undefined);
 
@@ -24,8 +25,7 @@ const CommentList = ({ comments, setComments }) => {
       .catch((err) => {
         setIsError(true);
         setIsLoading(false);
-        console.log(err.response.data.msg);
-        console.log(err.response.status);
+        setError({ status: err.response.status, msg: err.response.data.msg });
       });
     return () => {
       isMounted = false;
@@ -36,7 +36,12 @@ const CommentList = ({ comments, setComments }) => {
       {isLoading ? (
         <p>Loading comments</p>
       ) : isError ? (
-        <p>Sorry, theres been an error, we can't find this articles comments</p>
+        <section className="ErrorSection">
+          <p>Sorry, there was an error :( </p>
+          <p>
+            {error.status}, {error.msg}
+          </p>
+        </section>
       ) : (
         <ul>
           {comments.map((comment) => {

@@ -8,6 +8,7 @@ const SingleArticlePage = () => {
   const [singleArticle, setSingleArticle] = useState({});
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({ status: undefined, msg: "error" });
 
   const { article_id } = useParams();
 
@@ -19,18 +20,24 @@ const SingleArticlePage = () => {
         setSingleArticle(articleFromApi);
         setIsLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
         setIsLoading(false);
         setIsError(true);
+        setError({ status: err.response.status, msg: err.response.data.msg });
       });
   }, [article_id]);
 
   return (
     <div>
-      {isError ? (
-        <p>Sorry, we can't find that article</p>
-      ) : isLoading ? (
+      {isLoading ? (
         <p>Loading...</p>
+      ) : isError ? (
+        <section className="ErrorSection">
+          <p>Sorry, there was an error :( </p>
+          <p>
+            {error.status}, {error.msg}
+          </p>
+        </section>
       ) : (
         <SingleArticle article={singleArticle} />
       )}
