@@ -16,9 +16,17 @@ body,
   grid-template-rows: min-content min-content auto min-content; */
   display: flex;
   flex-direction: column;
+  align-content: flex-end;
 }
 main {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  align-items: center;
+}
+
+.ErrorPage {
+  min-height: 70vh;
 }
 
 .Nav {
@@ -85,7 +93,7 @@ ul {
 }
 
 .ArticleListOrder__select {
-  width: 150px;
+  width: 130px;
   margin-right: 5px;
 }
 
@@ -186,6 +194,18 @@ ul {
 
 .App-link {
   color: #61dafb;
+}
+
+.ErrorSection {
+  margin: 10%;
+  border: 1px solid black;
+  width: 40%;
+  background-color: #fffff5;
+  padding: 10px;
+}
+
+.Error__HomeLink {
+  padding-bottom: 10px;
 }
 
 footer {
