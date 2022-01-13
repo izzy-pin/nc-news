@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import { getComments } from "../../../utils/api";
 import CommentCard from "./CommentCard";
 
-const CommentList = () => {
-  const [comments, setComments] = useState([]);
+const CommentList = ({ comments, setComments }) => {
   const { article_id } = useParams();
 
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [deletedComment, setDeletedComment] = useState(undefined);
 
   useEffect(() => {
     let isMounted = true;
@@ -21,14 +21,16 @@ const CommentList = () => {
           setIsLoading(false);
         }
       })
-      .catch(() => {
+      .catch((err) => {
         setIsError(true);
         setIsLoading(false);
+        console.log(err.response.data.msg);
+        console.log(err.response.status);
       });
     return () => {
       isMounted = false;
     };
-  }, [article_id]);
+  }, [article_id, setComments, deletedComment]);
   return (
     <section className="Comment__Section">
       {isLoading ? (
@@ -38,7 +40,13 @@ const CommentList = () => {
       ) : (
         <ul>
           {comments.map((comment) => {
-            return <CommentCard key={comment.comment_id} comment={comment} />;
+            return (
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+                setDeletedComment={setDeletedComment}
+              />
+            );
           })}
         </ul>
       )}

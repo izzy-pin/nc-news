@@ -10,14 +10,14 @@ export const getTopics = () => {
   });
 };
 
-export const getArticles = (topic) => {
-  let path = "/articles";
-  if (topic) {
-    path += `?topic=${topic}`;
-  }
-  return newsRnApi.get(path).then((res) => {
-    return res.data.articles;
-  });
+export const getArticles = (topic, sort_by, order) => {
+  return newsRnApi
+    .get("/articles", {
+      params: { topic, sort_by, order },
+    })
+    .then((res) => {
+      return res.data.articles;
+    });
 };
 
 export const getArticleByArticleId = (article_id) => {
@@ -60,4 +60,8 @@ export const postComment = (article_id, data) => {
     .then((res) => {
       return res.data.comment;
     });
+};
+
+export const deleteComment = (comment_id) => {
+  return newsRnApi.delete(`/comments/${comment_id}`);
 };

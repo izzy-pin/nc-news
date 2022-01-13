@@ -1,8 +1,13 @@
 import CommentVotes from "./CommentVotes";
 import UserImage from "./UserImage";
+import { DefaultUserContext } from "../../../contexts/DefaultUser";
+import { useContext } from "react";
+import DeleteComment from "./DeleteComment";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, setDeletedComment }) => {
   const createdDate = new Date(comment.created_at);
+  const { user } = useContext(DefaultUserContext);
+
   return (
     <li className="CommentCard__li">
       <section className="CommentCard__body">
@@ -15,6 +20,12 @@ const CommentCard = ({ comment }) => {
         </div>
         <p>{comment.body}</p>
         <CommentVotes comment={comment} />
+        {user === comment.author ? (
+          <DeleteComment
+            comment_id={comment.comment_id}
+            setDeletedComment={setDeletedComment}
+          />
+        ) : null}
       </section>
     </li>
   );
