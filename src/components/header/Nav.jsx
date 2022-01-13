@@ -35,6 +35,16 @@ const Nav = () => {
       </NavLink>
 
       <div className="Nav--TopicsDiv">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "NavLink NavLink--Topics NavLink--Active"
+              : "NavLink--Topics NavLink"
+          }
+          to={"/"}
+        >
+          all
+        </NavLink>
         {isLoading ? (
           <span>preparing topics...</span>
         ) : isError ? (
