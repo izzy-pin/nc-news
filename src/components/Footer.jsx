@@ -10,7 +10,7 @@ const Footer = () => {
       >
         GitHub <i className="fab fa-github"></i>
       </a>{" "}
-      and hosted on{" "}
+      and{" "}
       <a
         href="https://newsrn.herokuapp.com/api/"
         target="_blank"
