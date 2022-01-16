@@ -1,4 +1,4 @@
-import CommentVotes from "./CommentVotes";
+import Votes from "../Votes";
 import UserImage from "./UserImage";
 import { DefaultUserContext } from "../../../contexts/DefaultUser";
 import { useContext } from "react";
@@ -19,7 +19,7 @@ const CommentCard = ({ comment, setDeletedComment }) => {
           </div>
         </div>
         <p>{comment.body}</p>
-        <CommentVotes comment={comment} />
+        <Votes votes={comment.votes} id={comment.comment_id} />
         {user === comment.author ? (
           <DeleteComment
             comment_id={comment.comment_id}

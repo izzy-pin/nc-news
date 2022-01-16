@@ -10,10 +10,10 @@ export const getTopics = () => {
   });
 };
 
-export const getArticles = (topic, sort_by, order) => {
+export const getArticles = (topic, sort_by, order, p, limit) => {
   return newsRnApi
     .get("/articles", {
-      params: { topic, sort_by, order },
+      params: { topic, sort_by, order, p, limit },
     })
     .then((res) => {
       return res.data.articles;
@@ -32,17 +32,9 @@ export const getComments = (article_id) => {
   });
 };
 
-export const patchArticleVote = (article_id, inc) => {
+export const patchVote = (id, inc, componentPath) => {
   return newsRnApi
-    .patch(`/articles/${article_id}`, { inc_votes: inc })
-    .then((res) => {
-      return res.data.article;
-    });
-};
-
-export const patchCommentVote = (comment_id, inc) => {
-  return newsRnApi
-    .patch(`/comments/${comment_id}`, { inc_votes: inc })
+    .patch(`/${componentPath}/${id}`, { inc_votes: inc })
     .then((res) => {
       return res.data.comment;
     });

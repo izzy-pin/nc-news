@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getArticleByArticleId } from "../../utils/api";
 import CommentList from "./Comment/CommentList";
-import ArticleVotes from "./ArticleVotes";
 import PostComment from "./Comment/PostComment";
+import Votes from "./Votes";
 
 const SingleArticlePage = () => {
   const [singleArticle, setSingleArticle] = useState({});
@@ -62,7 +62,7 @@ const SingleArticlePage = () => {
             <p className="SingleArticle__body">{singleArticle.body}</p>
             <div className="CommentVote__Div">
               <span>Comments: {singleArticle.comment_count}</span>{" "}
-              <ArticleVotes article={singleArticle} />
+              <Votes votes={singleArticle.votes} id={article_id} />
             </div>
           </article>
 
