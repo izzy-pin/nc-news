@@ -12,10 +12,9 @@ const DeleteComment = ({ comment_id, setDeletedComment }) => {
         setIsLoading(false);
         setDeletedComment(comment_id);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsLoading(false);
         setIsError(true);
-        console.log(err.message);
       });
   };
 
