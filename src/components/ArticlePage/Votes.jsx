@@ -40,6 +40,7 @@ const Votes = ({ votes, id }) => {
           vote(1, "like");
         }}
         className="Like__button"
+        disabled={votingChoice.dislike}
       >
         <i
           className={
@@ -53,6 +54,7 @@ const Votes = ({ votes, id }) => {
           vote(-1, "dislike");
         }}
         className="Dislike__button"
+        disabled={votingChoice.like}
       >
         <i
           className={
