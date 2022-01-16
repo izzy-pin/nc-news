@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getArticleByArticleId } from "../../utils/api";
 import CommentList from "./Comment/CommentList";
 import ArticleVotes from "./ArticleVotes";
@@ -7,17 +7,22 @@ import PostComment from "./Comment/PostComment";
 
 const SingleArticlePage = () => {
   const [singleArticle, setSingleArticle] = useState({});
-  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState({ status: undefined, msg: "error" });
-  const createdDate = new Date(singleArticle.created_at);
+  const [error, setError] = useState({ status: null, msg: "" });
   const [comments, setComments] = useState([]);
+
+  const createdDate = new Date(singleArticle.created_at);
 
   const { article_id } = useParams();
 
   useEffect(() => {
-    setIsError(false);
     setIsLoading(true);
+    setError((currentError) => {
+      return {
+        status: null,
+        msg: "",
+      };
+    });
     getArticleByArticleId(article_id)
       .then((articleFromApi) => {
         setSingleArticle(articleFromApi);
@@ -25,20 +30,27 @@ const SingleArticlePage = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setIsError(true);
-        setError({ status: err.response.status, msg: err.response.data.msg });
+        setError({
+          status: err.response.status,
+          msg: err.response.data.msg,
+        });
       });
   }, [article_id]);
 
   return (
     <section className="SingleArticlePage__Section">
       {isLoading ? <p>Loading...</p> : null}
-      {isError ? (
+      {error.status ? (
         <section className="ErrorSection">
           <p>Sorry, there was an error :( </p>
           <p>
             {error.status}, {error.msg}
           </p>
+          <div className="Error__HomeLink">
+            <Link to={"/"}>
+              Home <i className="fas fa-home"></i>
+            </Link>
+          </div>
         </section>
       ) : (
         <main className="SingleArticle__main">
