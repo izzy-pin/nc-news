@@ -6,15 +6,19 @@ import CommentCard from "./CommentCard";
 const CommentList = ({ comments, setComments }) => {
   const { article_id } = useParams();
 
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState({ status: undefined, msg: "error" });
+  const [error, setError] = useState({ status: null, msg: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [deletedComment, setDeletedComment] = useState(undefined);
 
   useEffect(() => {
     let isMounted = true;
-    setIsError(false);
     setIsLoading(true);
+    setError((currentError) => {
+      return {
+        status: null,
+        msg: "",
+      };
+    });
     getComments(article_id)
       .then((commentsFromApi) => {
         if (isMounted) {
@@ -23,7 +27,6 @@ const CommentList = ({ comments, setComments }) => {
         }
       })
       .catch((err) => {
-        setIsError(true);
         setIsLoading(false);
         setError({ status: err.response.status, msg: err.response.data.msg });
       });
@@ -35,7 +38,7 @@ const CommentList = ({ comments, setComments }) => {
     <section className="Comment__Section">
       {isLoading ? (
         <p>Loading comments</p>
-      ) : isError ? (
+      ) : error.status ? (
         <section className="ErrorSection">
           <p>Sorry, there was an error :( </p>
           <p>
