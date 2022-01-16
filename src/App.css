@@ -12,12 +12,12 @@ body,
 .App {
   text-align: center;
   min-height: 100vh;
-  /* display: grid;
-  grid-template-rows: min-content min-content auto min-content; */
+
   display: flex;
   flex-direction: column;
   align-content: flex-end;
 }
+
 main {
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ main {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: white;
   padding: 0 20px 0 20px;
 }
@@ -70,7 +70,7 @@ main {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: white;
   padding: 5px 20px 0px;
   border-top: 1px solid whitesmoke;
