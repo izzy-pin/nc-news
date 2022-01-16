@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getTopics } from "../../utils/api";
-import NavBarLink from "./NavBarLink";
 
 const Nav = () => {
   const [topics, setTopics] = useState([]);
@@ -50,7 +49,19 @@ const Nav = () => {
         ) : isError ? (
           <span>sorry, an error has occured</span>
         ) : (
-          topics.map((topic) => <NavBarLink key={topic.slug} topic={topic} />)
+          topics.map((topic) => (
+            <NavLink
+              key={topic.slug}
+              className={({ isActive }) =>
+                isActive
+                  ? "NavLink NavLink--Topics NavLink--Active"
+                  : "NavLink--Topics NavLink"
+              }
+              to={`/topics/${topic.slug}`}
+            >
+              {topic.slug}
+            </NavLink>
+          ))
         )}
       </div>
     </nav>
