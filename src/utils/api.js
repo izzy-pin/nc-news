@@ -10,10 +10,10 @@ export const getTopics = () => {
   });
 };
 
-export const getArticles = (topic, sort_by, order, p, limit) => {
+export const getArticles = (topic, sort_by, order, p) => {
   return newsRnApi
     .get("/articles", {
-      params: { topic, sort_by, order, p, limit },
+      params: { topic, sort_by, order, p },
     })
     .then((res) => {
       return res.data.articles;

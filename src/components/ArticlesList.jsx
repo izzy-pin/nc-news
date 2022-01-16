@@ -1,60 +1,99 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams, Link } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
-import ArticlesPag from "./ArticlesPag";
 import SortBy from "./SortBy";
+
+const PAGE_LENGTH = 10;
 
 const ArticlesList = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState({ status: undefined, msg: "error" });
-
-  const [sort_by, setSort_by] = useState(undefined);
-  const [order, setOrder] = useState(undefined);
+  const [error, setError] = useState({
+    status: null,
+    msg: "",
+  });
 
   //destructure topic from the params obj
   const { topic } = useParams();
+  const [chosenTopic, setChosenTopic] = useState("");
+  const [sort_by, setSort_by] = useState(undefined);
+  const [order, setOrder] = useState(undefined);
+  const [p, setP] = useState(1);
+  const [total_count, setTotal_count] = useState(null);
+
+  if (topic !== chosenTopic) {
+    setChosenTopic(topic);
+    setP(1);
+  }
 
   useEffect(() => {
     setIsLoading(true);
-    setIsError(false);
-    getArticles(topic, sort_by, order)
+    setError((currentError) => {
+      return {
+        status: null,
+        msg: "",
+      };
+    });
+    getArticles(topic, sort_by, order, p)
       .then((articlesFromApi) => {
         setIsLoading(false);
         setArticles(articlesFromApi);
+        setTotal_count(articlesFromApi[0].total_count);
       })
       .catch((err) => {
         setIsLoading(false);
-        setIsError(true);
-        setError({ status: err.response.status, msg: err.response.data.msg });
+        setError({
+          status: err.response.status,
+          msg: err.response.data.msg,
+        });
       });
-  }, [topic, sort_by, order]);
+  }, [topic, sort_by, order, p]);
 
   return (
     <main>
       <h1>{topic ? topic : "all topics"} </h1>
+      {isLoading ? <p>Loading...</p> : null}
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : isError ? (
+      {error.status ? (
         <section className="ErrorSection">
-          <p>Sorry :( </p>
+          <p>Sorry there was an error :( </p>
           <p>
             {error.status}, {error.msg}
           </p>
+          <div className="Error__HomeLink">
+            <Link to={"/"}>
+              Home <i className="fas fa-home"></i>
+            </Link>
+          </div>
         </section>
       ) : (
-        <>
+        <section className="ArticlesList__Section">
           <SortBy setSort_by={setSort_by} setOrder={setOrder} />
           <ul className="ArticleList">
             {articles.map((article) => (
               <ArticleCard key={article.article_id} article={article} />
             ))}
           </ul>
-          <ArticlesPag />
-        </>
+          <div className="Paginate__Div">
+            <button
+              onClick={() => {
+                setP((currentPage) => currentPage - 1);
+              }}
+              disabled={p - 1 === 0}
+            >
+              Prev
+            </button>
+            <button
+              onClick={() => {
+                setP((currentPage) => currentPage + 1);
+              }}
+              disabled={PAGE_LENGTH * p >= total_count}
+            >
+              Next
+            </button>
+          </div>
+        </section>
       )}
     </main>
   );
