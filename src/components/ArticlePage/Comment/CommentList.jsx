@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getComments } from "../../../utils/api";
 import CommentCard from "./CommentCard";
 
-const CommentList = ({ comments, setComments }) => {
+const CommentList = ({ comments, setComments, setCommentCount }) => {
   const { article_id } = useParams();
 
   const [error, setError] = useState({ status: null, msg: "" });
@@ -53,6 +53,7 @@ const CommentList = ({ comments, setComments }) => {
                 key={comment.comment_id}
                 comment={comment}
                 setDeletedComment={setDeletedComment}
+                setCommentCount={setCommentCount}
               />
             );
           })}

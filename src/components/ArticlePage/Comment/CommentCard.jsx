@@ -4,7 +4,7 @@ import { DefaultUserContext } from "../../../contexts/DefaultUser";
 import { useContext } from "react";
 import DeleteComment from "./DeleteComment";
 
-const CommentCard = ({ comment, setDeletedComment }) => {
+const CommentCard = ({ comment, setDeletedComment, setCommentCount }) => {
   const createdDate = new Date(comment.created_at);
   const { user } = useContext(DefaultUserContext);
 
@@ -19,13 +19,16 @@ const CommentCard = ({ comment, setDeletedComment }) => {
           </div>
         </div>
         <p>{comment.body}</p>
-        <Votes votes={comment.votes} id={comment.comment_id} />
-        {user === comment.author ? (
-          <DeleteComment
-            comment_id={comment.comment_id}
-            setDeletedComment={setDeletedComment}
-          />
-        ) : null}
+        <div className="CommentCard__Buttons">
+          <Votes votes={comment.votes} id={comment.comment_id} />
+          {user === comment.author ? (
+            <DeleteComment
+              comment_id={comment.comment_id}
+              setDeletedComment={setDeletedComment}
+              setCommentCount={setCommentCount}
+            />
+          ) : null}
+        </div>
       </section>
     </li>
   );
