@@ -22,7 +22,6 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  align-items: center;
 }
 
 .ErrorPage {
@@ -99,6 +98,12 @@ ul {
 
 .ArticleListSort__button {
   width: fit-content;
+  color: #fffff5;
+  background-color: #282c34;
+  border-radius: 20px;
+  border: 1px solid #282c34;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .ArticleCard {
@@ -106,6 +111,14 @@ ul {
   border: 1px solid grey;
   background-color: #fffff5;
   padding: 0 15px 10px;
+  display: flex;
+  justify-content: stretch;
+}
+
+.ArticleCard__Link {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .ArticleCard-Div {
@@ -114,6 +127,14 @@ ul {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.ArticleCard__h2 {
+  margin: 0;
+}
+
+.ArticleCard__h4 {
+  margin-top: 5px;
 }
 
 .SingleArticle__main {
@@ -140,7 +161,8 @@ ul {
 }
 
 .Like__button,
-.Dislike__button {
+.Dislike__button,
+.Delete__button {
   border: none;
   background: none;
   cursor: pointer;
@@ -152,6 +174,20 @@ ul {
 
 .Dislike__button:hover {
   color: red;
+}
+
+.Delete__button {
+  color: red;
+}
+
+.Delete__button:hover {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.CommentCard__Buttons {
+  display: flex;
+  flex-direction: row;
 }
 
 .CommentCard__li {
@@ -200,6 +236,39 @@ ul {
 
 .PostComment__button {
   width: fit-content;
+  color: #282c34;
+  border-radius: 20px;
+  border: 1px solid #282c34;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  background: none;
+}
+
+.PostComment__button:hover {
+  color: #fffff5;
+  background-color: #282c34;
+}
+
+.Paginate__button {
+  width: fit-content;
+  color: #fffff5;
+  background-color: #282c34;
+  border-radius: 20px;
+  border: 1px solid #282c34;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  margin: 0 5px 10px 5px;
+}
+
+.Paginate__button:active {
+  cursor: pointer;
+}
+
+.Paginate__button:disabled {
+  cursor: default;
+  color: #929292;
+  background-color: #777a83;
+  border: 1px solid #777a83;
 }
 
 .App-link {
@@ -225,6 +294,7 @@ footer {
   .ArticleList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .ArticleCard {
     width: 250px;
@@ -243,5 +313,6 @@ footer {
   }
   .ArticleCard {
     width: 300px;
+    flex: 0 1 auto;
   }
 }
