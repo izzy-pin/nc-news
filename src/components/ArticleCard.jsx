@@ -17,8 +17,10 @@ const ArticleCard = ({ article }) => {
         className="ArticleCard__Link"
       >
         <h3>{article.topic}</h3>
-        <h2>{article.title}</h2>
-        <h4>{article.author}</h4>
+        <div className="ArticleCard__div__author">
+          <h2 className="ArticleCard__h2">{article.title}</h2>
+          <h4 className="ArticleCard__h4">{article.author}</h4>
+        </div>
         <div className="ArticleCard-Div">
           <span>{formattedDate} </span>
           <span>
