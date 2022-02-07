@@ -50,8 +50,9 @@ main {
   text-decoration: none;
 }
 
-.NavLink--TopicsDiv {
+.Nav--TopicsDiv {
   display: flex;
+  align-items: center;
 }
 
 .NavLink--Topics {
@@ -87,7 +88,7 @@ ul {
 }
 
 .ArticleListSort__select {
-  width: 120px;
+  width: 125px;
   margin-right: 5px;
 }
 
@@ -141,6 +142,7 @@ ul {
 .SingleArticle__main {
   background-color: #fffff5;
   padding: 0 20px 20px;
+  align-items: center;
 }
 .SingleArticlePage__Section {
   margin: auto;
@@ -212,6 +214,7 @@ ul {
   width: 50px;
   height: 50px;
   border: 1px solid grey;
+  margin-left: 5px;
 }
 .PostComment_section {
   display: flex;
@@ -258,7 +261,7 @@ ul {
   border: 1px solid #282c34;
   padding: 5px 10px 5px 10px;
   cursor: pointer;
-  margin: 0 5px 10px 5px;
+  margin: 15px 5px 25px 5px;
 }
 
 .Paginate__button:active {
