@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const SortBy = ({ setSort_by, setOrder }) => {
-  const [sortByValue, setSortByValue] = useState("created_at");
-  const [orderValue, setOrderValue] = useState("desc");
+const SortBy = ({ setSort_by, sort_by, setOrder, order }) => {
+  const [sortByValue, setSortByValue] = useState(sort_by);
+  const [orderValue, setOrderValue] = useState(order);
 
   const handleSortByChange = (event) => {
     setSortByValue(event.target.value);
