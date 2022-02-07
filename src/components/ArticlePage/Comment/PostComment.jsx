@@ -2,7 +2,7 @@ import { useState } from "react";
 import { postComment } from "../../../utils/api";
 import { useImageUrl } from "../../../utils/useImageUrl";
 
-const PostComment = ({ article_id, setComments }) => {
+const PostComment = ({ article_id, setComments, setCommentCount }) => {
   const [textAreaInput, setTextAreaInput] = useState("");
   const [data, setData] = useState({ username: "tickle122", body: "" });
   const [isError, setIsError] = useState(false);
@@ -23,6 +23,7 @@ const PostComment = ({ article_id, setComments }) => {
     setIsError(false);
     event.preventDefault();
     setTextAreaInput("");
+    setCommentCount((currCount) => +currCount + 1);
     postComment(article_id, data)
       .then((commentFromApi) => {
         setIsLoading(false);
@@ -33,8 +34,7 @@ const PostComment = ({ article_id, setComments }) => {
       .catch((err) => {
         setIsLoading(false);
         setIsError(true);
-        console.log(err.response.data.msg);
-        console.log(err.response.status);
+        setCommentCount((currCount) => +currCount - 1);
       });
   };
 

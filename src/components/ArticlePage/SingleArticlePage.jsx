@@ -10,6 +10,7 @@ const SingleArticlePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ status: null, msg: "" });
   const [comments, setComments] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
 
   const createdDate = new Date(singleArticle.created_at);
 
@@ -27,6 +28,7 @@ const SingleArticlePage = () => {
       .then((articleFromApi) => {
         setSingleArticle(articleFromApi);
         setIsLoading(false);
+        setCommentCount(articleFromApi.comment_count);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -39,8 +41,9 @@ const SingleArticlePage = () => {
 
   return (
     <section className="SingleArticlePage__Section">
-      {isLoading ? <p>Loading...</p> : null}
-      {error.status ? (
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error.status ? (
         <section className="ErrorSection">
           <p>Sorry, there was an error :( </p>
           <p>
@@ -61,7 +64,7 @@ const SingleArticlePage = () => {
             <p className="SingleArticle__date">{createdDate.toUTCString()}</p>
             <p className="SingleArticle__body">{singleArticle.body}</p>
             <div className="CommentVote__Div">
-              <span>Comments: {singleArticle.comment_count}</span>{" "}
+              <span>Comments: {commentCount}</span>{" "}
               <Votes votes={singleArticle.votes} id={article_id} />
             </div>
           </article>
@@ -69,9 +72,14 @@ const SingleArticlePage = () => {
           <PostComment
             article_id={singleArticle.article_id}
             setComments={setComments}
+            setCommentCount={setCommentCount}
           />
 
-          <CommentList comments={comments} setComments={setComments} />
+          <CommentList
+            comments={comments}
+            setComments={setComments}
+            setCommentCount={setCommentCount}
+          />
         </main>
       )}
     </section>
