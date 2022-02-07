@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
-import { getArticles } from "../utils/api";
+import { capitaliseStr, getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import SortBy from "./SortBy";
 
@@ -52,7 +52,7 @@ const ArticlesList = () => {
 
   return (
     <main>
-      <h1>{topic ? topic : "all topics"} </h1>
+      <h1>{topic ? capitaliseStr(topic) : "All topics"} </h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : error.status ? (

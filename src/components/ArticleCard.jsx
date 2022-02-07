@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { capitaliseStr } from "../utils/api";
 
 const ArticleCard = ({ article }) => {
   const createdDate = new Date(article.created_at);
@@ -16,7 +17,7 @@ const ArticleCard = ({ article }) => {
         to={`/articles/${article.article_id}`}
         className="ArticleCard__Link"
       >
-        <h3>{article.topic}</h3>
+        <h3>{capitaliseStr(article.topic)}</h3>
         <div className="ArticleCard__div__author">
           <h2 className="ArticleCard__h2">{article.title}</h2>
           <h4 className="ArticleCard__h4">{article.author}</h4>

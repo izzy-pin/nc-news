@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getTopics } from "../../utils/api";
 import UserImage from "../ArticlePage/Comment/UserImage";
+import { capitaliseStr } from "../../utils/api";
 
 const Nav = () => {
   const [topics, setTopics] = useState([]);
@@ -16,7 +17,7 @@ const Nav = () => {
         setTopics(topicsFromApi);
         setIsLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsError(true);
         setIsLoading(false);
       });
@@ -35,16 +36,6 @@ const Nav = () => {
       </NavLink>
 
       <div className="Nav--TopicsDiv">
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? "NavLink NavLink--Topics NavLink--Active"
-              : "NavLink--Topics NavLink"
-          }
-          to={"/"}
-        >
-          all
-        </NavLink>
         {isLoading ? (
           <span>preparing topics...</span>
         ) : isError ? (
@@ -60,7 +51,7 @@ const Nav = () => {
               }
               to={`/topics/${topic.slug}`}
             >
-              {topic.slug}
+              {capitaliseStr(topic.slug)}
             </NavLink>
           ))
         )}
