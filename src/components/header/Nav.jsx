@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getTopics } from "../../utils/api";
+import UserImage from "../ArticlePage/Comment/UserImage";
 
 const Nav = () => {
   const [topics, setTopics] = useState([]);
@@ -63,6 +64,7 @@ const Nav = () => {
             </NavLink>
           ))
         )}
+        <UserImage username={"tickle122"} />
       </div>
     </nav>
   );
