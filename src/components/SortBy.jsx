@@ -19,9 +19,9 @@ const SortBy = ({ setSort_by, sort_by, setOrder, order }) => {
   };
   return (
     <section className="SortBy__Section">
-      {/* <h3 className="SortBy__h3">Sort by</h3> */}
       <form onSubmit={handleSubmit}>
         <select
+          aria-label="sorty by"
           className="ArticleListSort__select"
           defaultValue={sortByValue}
           onChange={handleSortByChange}
@@ -32,6 +32,7 @@ const SortBy = ({ setSort_by, sort_by, setOrder, order }) => {
           <option value="votes">Likes</option>
         </select>
         <select
+          aria-label="order by"
           className="ArticleListOrder__select"
           defaultValue={orderValue}
           onChange={handleOrderChange}
