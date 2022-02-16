@@ -19,7 +19,7 @@ const SortBy = ({ setSort_by, sort_by, setOrder, order }) => {
   };
   return (
     <section className="SortBy__Section">
-      <h2>Sort by:</h2>
+      {/* <h3 className="SortBy__h3">Sort by</h3> */}
       <form onSubmit={handleSubmit}>
         <select
           className="ArticleListSort__select"
@@ -39,17 +39,17 @@ const SortBy = ({ setSort_by, sort_by, setOrder, order }) => {
           {" "}
           <option value="desc">
             {sortByValue === "created_at"
-              ? "newest to oldest"
-              : "highest to lowest"}
+              ? "Newest to oldest"
+              : "Highest to lowest"}
           </option>
           <option value="asc">
             {sortByValue === "created_at"
-              ? "oldest to newest"
-              : "lowest to highest"}
+              ? "Oldest to newest"
+              : "Lowest to highest"}
           </option>
         </select>
 
-        <button className="ArticleListSort__button">Go</button>
+        <button className="ArticleListSort__button">Sort</button>
       </form>
     </section>
   );
