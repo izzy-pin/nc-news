@@ -53,7 +53,12 @@ const PostComment = ({ article_id, setComments, setCommentCount }) => {
           placeholder="Thoughts?..."
           className="PostComment__textarea"
         ></textarea>
-        <button className="PostComment__button">Comment</button>
+        <button
+          className="PostComment__button"
+          disabled={textAreaInput.length === 0}
+        >
+          Comment
+        </button>
 
         <span>
           {" "}

@@ -87,7 +87,6 @@ ul {
 
 .SortBy__Section {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   margin-bottom: 35px;
@@ -96,7 +95,6 @@ ul {
 .ArticleListSort__select {
   width: 150px;
   margin: 0 10px;
-  /* background-color: blue; */
   padding: 5px;
   font-size: 1rem;
   border-radius: 10px;
@@ -119,6 +117,7 @@ ul {
   padding: 5px 10px;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 10px;
 }
 
 .ArticleCard {
@@ -128,10 +127,6 @@ ul {
   padding: 0 15px 10px;
   display: flex;
   justify-content: stretch;
-}
-
-.ArticleCard:hover {
-  background-color: #fffff1;
 }
 
 .ArticleCard:hover div h2 {
@@ -161,6 +156,12 @@ ul {
   margin-top: 5px;
 }
 
+.SingleArticle__main p a,
+.SingleArticle__main p a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 .SingleArticle__main {
   background-color: #fffff5;
   padding: 0 20px 20px;
@@ -169,6 +170,10 @@ ul {
 .SingleArticlePage__Section {
   margin: auto;
   justify-content: center;
+}
+
+.SingleArticle__title {
+  font-size: 2rem;
 }
 
 .SingleArticle__topic,
@@ -265,17 +270,26 @@ ul {
 
 .PostComment__button {
   width: fit-content;
-  color: #282c34;
+  color: #fffff5;
+  background-color: #282c34;
   border-radius: 20px;
   border: 1px solid #282c34;
   padding: 5px 10px 5px 10px;
-  cursor: pointer;
-  background: none;
 }
 
-.PostComment__button:hover {
+.PostComment__button:active {
+  cursor: pointer;
+}
+
+.PostComment__button:disabled {
   color: #fffff5;
-  background-color: #282c34;
+  background-color: rgba(119, 122, 131, 0.4);
+  border-color: rgba(119, 122, 131, 0.4);
+  font-style: oblique;
+}
+
+.Paginate__Div {
+  margin: 50px 0;
 }
 
 .Paginate__button {
@@ -287,7 +301,7 @@ ul {
   border: 1px solid #282c34;
   padding: 5px 10px 5px 10px;
   cursor: pointer;
-  margin: 15px 5px 25px 5px;
+  margin: 0 5px;
 }
 
 .Paginate__button:active {
@@ -317,7 +331,55 @@ ul {
 }
 
 footer {
-  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: auto;
+  background-color: #282c34;
+  color: #fffff5;
+  padding: 10px 0;
+}
+footer section p {
+  margin: 3px 0;
+}
+
+footer p {
+  font-size: 1.1rem;
+}
+
+footer a,
+footer a:active {
+  color: #fffff5;
+  text-decoration: none;
+  border: #282c34 solid 1px;
+  border-radius: 20px;
+
+  padding: 5px;
+}
+footer a:hover {
+  border: #fffff5 solid 1px;
+}
+
+@media screen and (max-width: 500px) {
+  .Nav {
+    font-size: 1.4rem;
+  }
+
+  .Nav--TopicsDiv {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  footer {
+    font-size: 1rem;
+  }
+
+  footer p {
+    padding: 2px 0;
+  }
 }
 
 @media screen and (min-width: 600px) {
