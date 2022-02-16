@@ -209,13 +209,16 @@ ul {
   padding: 0 0 0 15px;
 }
 
-.UserComment__img {
+.UserComment__img,
+.ppPlaceholder__div {
   border-radius: 50%;
   width: 50px;
   height: 50px;
   border: 1px solid grey;
   margin-left: 5px;
+  font-size: 8px;
 }
+
 .PostComment_section {
   display: flex;
   flex-direction: row;

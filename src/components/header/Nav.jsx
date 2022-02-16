@@ -3,11 +3,14 @@ import { NavLink } from "react-router-dom";
 import { getTopics } from "../../utils/api";
 import UserImage from "../ArticlePage/Comment/UserImage";
 import { capitaliseStr } from "../../utils/api";
+import { DefaultUserContext } from "../../contexts/DefaultUser";
+import { useContext } from "react";
 
 const Nav = () => {
   const [topics, setTopics] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useContext(DefaultUserContext);
 
   useEffect(() => {
     setIsError(false);
@@ -55,7 +58,7 @@ const Nav = () => {
             </NavLink>
           ))
         )}
-        <UserImage username={"tickle122"} />
+        <UserImage username={user} />
       </div>
     </nav>
   );
