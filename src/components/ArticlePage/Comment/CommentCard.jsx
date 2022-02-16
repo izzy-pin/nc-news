@@ -20,7 +20,11 @@ const CommentCard = ({ comment, setDeletedComment, setCommentCount }) => {
         </div>
         <p>{comment.body}</p>
         <div className="CommentCard__Buttons">
-          <Votes votes={comment.votes} id={comment.comment_id} />
+          <Votes
+            votes={comment.votes}
+            id={comment.comment_id}
+            componentPath={"comments"}
+          />
           {user === comment.author ? (
             <DeleteComment
               comment_id={comment.comment_id}

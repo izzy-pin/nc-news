@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { patchVote } from "../../utils/api";
 
-const Votes = ({ votes, id }) => {
+const Votes = ({ votes, id, componentPath }) => {
   const [count, setCount] = useState(votes);
   const [isError, setIsError] = useState(false);
   if (typeof count === "undefined" && typeof votes !== "undefined") {
@@ -12,7 +12,6 @@ const Votes = ({ votes, id }) => {
     like: false,
     dislike: false,
   });
-  const componentPath = "comments";
 
   const vote = (inc, buttonType) => {
     setVotingChoice((currVoting) => {
@@ -22,15 +21,19 @@ const Votes = ({ votes, id }) => {
       votingChoice[buttonType] ? currCount - inc : currCount + inc
     );
 
-    patchVote(id, inc, componentPath).catch(() => {
-      setCount((currCount) =>
-        votingChoice[buttonType] ? currCount + inc : currCount - inc
-      );
-      setVotingChoice((currVoting) => {
-        return { ...currVoting, [buttonType]: !currVoting[buttonType] };
+    patchVote(id, inc, componentPath)
+      .then(() => {
+        setIsError(false);
+      })
+      .catch(() => {
+        setCount((currCount) =>
+          votingChoice[buttonType] ? currCount + inc : currCount - inc
+        );
+        setVotingChoice((currVoting) => {
+          return { ...currVoting, [buttonType]: !currVoting[buttonType] };
+        });
+        setIsError(true);
       });
-      setIsError(true);
-    });
   };
 
   return (

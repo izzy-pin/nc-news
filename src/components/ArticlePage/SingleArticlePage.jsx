@@ -69,7 +69,11 @@ const SingleArticlePage = () => {
             <p className="SingleArticle__body">{singleArticle.body}</p>
             <div className="CommentVote__Div">
               <span>Comments: {commentCount}</span>{" "}
-              <Votes votes={singleArticle.votes} id={article_id} />
+              <Votes
+                votes={singleArticle.votes}
+                id={article_id}
+                componentPath={"articles"}
+              />
             </div>
           </article>
 
