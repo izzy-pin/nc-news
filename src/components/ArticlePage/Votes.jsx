@@ -36,6 +36,7 @@ const Votes = ({ votes, id }) => {
   return (
     <div className="Votes__div">
       <button
+        aria-label="like"
         onClick={() => {
           vote(1, "like");
         }}
@@ -50,6 +51,7 @@ const Votes = ({ votes, id }) => {
       </button>{" "}
       {count}{" "}
       <button
+        aria-label="dislike"
         onClick={() => {
           vote(-1, "dislike");
         }}

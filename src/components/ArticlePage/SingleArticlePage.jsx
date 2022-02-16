@@ -58,8 +58,12 @@ const SingleArticlePage = () => {
       ) : (
         <main className="SingleArticle__main">
           <article className="SingleArticle__article">
-            <p className="SingleArticle__topic">{singleArticle.topic}</p>
-            <h2 className="SingleArticle__title">{singleArticle.title}</h2>
+            <p className="SingleArticle__topic">
+              <Link to={`/topics/${singleArticle.topic}`}>
+                {singleArticle.topic}
+              </Link>
+            </p>
+            <h1 className="SingleArticle__title">{singleArticle.title}</h1>
             <p className="SingleArticle__author">{singleArticle.author}</p>{" "}
             <p className="SingleArticle__date">{createdDate.toUTCString()}</p>
             <p className="SingleArticle__body">{singleArticle.body}</p>
