@@ -25,7 +25,7 @@ const CommentCard = ({ comment, setDeletedComment, setCommentCount }) => {
             id={comment.comment_id}
             componentPath={"comments"}
           />
-          {user === comment.author ? (
+          {user.username === comment.author ? (
             <DeleteComment
               comment_id={comment.comment_id}
               setDeletedComment={setDeletedComment}

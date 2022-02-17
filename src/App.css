@@ -46,25 +46,48 @@ main {
 .ArticleCard__Link,
 .ArticleCard__Link:active,
 .ArticleCard__Link:visited {
+  margin: 5px 0;
   color: inherit;
   text-decoration: none;
 }
 
-.Nav--TopicsDiv {
+.Nav__TopicsDiv {
   display: flex;
   align-items: center;
 }
 
-.NavLink--Topics {
+.NavLink__Topics {
   margin: 0 5px;
 }
 
-.NavLink--Active,
+.NavLink__Active,
 .NavLink:hover {
   text-decoration: underline;
 }
 
-.Section--Date {
+.pp__Nav {
+  margin: 0 5px 0 20px;
+}
+
+.popover__Div {
+  margin: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.popover__Div p {
+  margin: 0;
+}
+
+.popoverinfo__Div {
+  margin-left: 10px;
+}
+
+.popoverUsername__p {
+  font-weight: bold;
+}
+
+.Section__Date {
   background-color: #282c34;
   min-height: 5vh;
   display: flex;
@@ -72,7 +95,7 @@ main {
   align-items: flex-start;
   font-size: 1.5rem;
   color: white;
-  padding: 5px 20px 0px;
+  padding: 7px 20px 0px;
   border-top: 1px solid whitesmoke;
 }
 
@@ -140,7 +163,7 @@ ul {
   width: 100%;
 }
 
-.ArticleCard-Div {
+.ArticleCard__Div {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -190,6 +213,10 @@ ul {
   font-weight: bold;
 }
 
+button i {
+  font-size: 1rem;
+}
+
 .Like__button,
 .Dislike__button,
 .Delete__button {
@@ -236,6 +263,10 @@ ul {
   padding: 0 0 0 15px;
 }
 
+.Votes__div {
+  margin-bottom: 5px;
+}
+
 .UserComment__img,
 .ppPlaceholder__div {
   border-radius: 50%;
@@ -246,13 +277,13 @@ ul {
   font-size: 8px;
 }
 
-.PostComment_section {
+.PostComment__section {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 0 15px;
   width: 100%;
-  margin: 20px 0 10px;
+  margin: 0 0 10px;
 }
 
 .PostComment__Form {
@@ -266,6 +297,7 @@ ul {
   resize: none;
   min-width: 60%;
   margin: 10px 0;
+  font-size: 1rem;
 }
 
 .PostComment__button {
@@ -275,6 +307,7 @@ ul {
   border-radius: 20px;
   border: 1px solid #282c34;
   padding: 5px 10px 5px 10px;
+  cursor: pointer;
 }
 
 .PostComment__button:active {
@@ -286,6 +319,7 @@ ul {
   background-color: rgba(119, 122, 131, 0.4);
   border-color: rgba(119, 122, 131, 0.4);
   font-style: oblique;
+  cursor: default;
 }
 
 .Paginate__Div {
@@ -321,13 +355,25 @@ ul {
 
 .ErrorSection {
   margin: auto;
-  border: 1px solid black;
+  border: 1px solid #777a83;
   background-color: #fffff5;
-  padding: 10px;
+  padding: 15px;
 }
 
 .Error__HomeLink {
-  padding-bottom: 10px;
+  padding: 10px 0;
+  margin: 5px 0;
+}
+.Error__HomeLink a,
+.Error__HomeLink a:active {
+  text-decoration: none;
+  color: #282c34;
+  text-decoration: none;
+  border: #282c34 solid 1px;
+  border-radius: 20px;
+
+  padding: 10px;
+  cursor: pointer;
 }
 
 footer {
@@ -354,11 +400,41 @@ footer a:active {
   text-decoration: none;
   border: #282c34 solid 1px;
   border-radius: 20px;
-
   padding: 5px;
 }
 footer a:hover {
   border: #fffff5 solid 1px;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.Loading__spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #282c34;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.Spinner__container {
+  display: flex;
+  justify-content: center;
+}
+
+.Loading__section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-bottom: 50%;
 }
 
 @media screen and (max-width: 500px) {

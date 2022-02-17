@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { postComment } from "../../../utils/api";
-import { useImageUrl } from "../../../utils/useImageUrl";
+import { DefaultUserContext } from "../../../contexts/DefaultUser";
+import { useContext } from "react";
 
 const PostComment = ({ article_id, setComments, setCommentCount }) => {
   const [textAreaInput, setTextAreaInput] = useState("");
-  const [data, setData] = useState({ username: "tickle122", body: "" });
+  const { user } = useContext(DefaultUserContext);
+  const [data, setData] = useState({ username: user.username, body: "" });
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const imageUrl = useImageUrl(data.username);
 
   const handleChange = (event) => {
     setTextAreaInput(event.target.value);
@@ -39,10 +39,10 @@ const PostComment = ({ article_id, setComments, setCommentCount }) => {
   };
 
   return (
-    <section className="PostComment_section">
+    <section className="PostComment__section">
       <img
         className="UserComment__img"
-        src={imageUrl}
+        src={user.avatar_url}
         alt="user's profile pic"
       ></img>
       <form className="PostComment__Form" onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ const PostComment = ({ article_id, setComments, setCommentCount }) => {
           required
           value={textAreaInput}
           onChange={handleChange}
-          placeholder="Thoughts?..."
+          placeholder={`Any thoughts, ${user.username}?`}
           className="PostComment__textarea"
         ></textarea>
         <button
