@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <header>
       <Nav />
-      <section className="Section--Date">
+      <section className="Section__Date">
         {currentDate.toLocaleDateString("en-uk", options)}
       </section>
     </header>
