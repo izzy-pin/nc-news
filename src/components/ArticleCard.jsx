@@ -22,7 +22,7 @@ const ArticleCard = ({ article }) => {
           <h2 className="ArticleCard__h2">{article.title}</h2>
           <h4 className="ArticleCard__h4">{article.author}</h4>
         </div>
-        <div className="ArticleCard-Div">
+        <div className="ArticleCard__Div">
           <span>{formattedDate} </span>
           <span>
             Comments: {article.comment_count}{" "}
