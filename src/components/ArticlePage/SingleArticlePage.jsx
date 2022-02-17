@@ -4,6 +4,7 @@ import { getArticleByArticleId } from "../../utils/api";
 import CommentList from "./Comment/CommentList";
 import PostComment from "./Comment/PostComment";
 import Votes from "./Votes";
+import LoadingSpinner from "../LoadingSpinner";
 
 const SingleArticlePage = () => {
   const [singleArticle, setSingleArticle] = useState({});
@@ -18,7 +19,7 @@ const SingleArticlePage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    setError((currentError) => {
+    setError(() => {
       return {
         status: null,
         msg: "",
@@ -42,7 +43,10 @@ const SingleArticlePage = () => {
   return (
     <section className="SingleArticlePage__Section">
       {isLoading ? (
-        <p>Loading...</p>
+        <section className="Loading__section">
+          <p>*flipping pages to article...*</p>
+          <LoadingSpinner />
+        </section>
       ) : error.status ? (
         <section className="ErrorSection">
           <p>Sorry, there was an error :( </p>
@@ -68,12 +72,12 @@ const SingleArticlePage = () => {
             <p className="SingleArticle__date">{createdDate.toUTCString()}</p>
             <p className="SingleArticle__body">{singleArticle.body}</p>
             <div className="CommentVote__Div">
-              <span>Comments: {commentCount}</span>{" "}
               <Votes
                 votes={singleArticle.votes}
                 id={article_id}
                 componentPath={"articles"}
               />
+              <p>Comments: {commentCount}</p>{" "}
             </div>
           </article>
 

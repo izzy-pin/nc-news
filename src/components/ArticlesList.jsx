@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { capitaliseStr, getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
+import LoadingSpinner from "./LoadingSpinner";
 import SortBy from "./SortBy";
 
 const PAGE_LENGTH = 10;
@@ -14,7 +15,6 @@ const ArticlesList = () => {
     msg: "",
   });
 
-  //destructure topic from the params obj
   const { topic } = useParams();
   const [chosenTopic, setChosenTopic] = useState("");
   const [sort_by, setSort_by] = useState("created_at");
@@ -54,7 +54,10 @@ const ArticlesList = () => {
     <main>
       <h1>{topic ? capitaliseStr(topic) : "All topics"} </h1>
       {isLoading ? (
-        <p>Loading...</p>
+        <section className="Loading__section">
+          <p>*shuffling news papers...*</p>
+          <LoadingSpinner />
+        </section>
       ) : error.status ? (
         <section className="ErrorSection">
           <p>Sorry there was an error :( </p>
