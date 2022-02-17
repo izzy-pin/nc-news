@@ -24,7 +24,7 @@ const Footer = () => {
         </p>
       </section>
       <p>
-        View news rn back-end on
+        View the news rn back-end on
         <a
           href="https://github.com/izzy-pin/news-rn-back-end"
           target="_blank"
