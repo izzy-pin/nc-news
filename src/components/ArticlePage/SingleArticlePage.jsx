@@ -49,7 +49,7 @@ const SingleArticlePage = () => {
         </section>
       ) : error.status ? (
         <section className="ErrorSection">
-          <p>Sorry, there was an error :( </p>
+          <h2>Sorry, there was an error :( </h2>
           <p>
             {error.status}, {error.msg}
           </p>
@@ -68,7 +68,11 @@ const SingleArticlePage = () => {
               </Link>
             </p>
             <h1 className="SingleArticle__title">{singleArticle.title}</h1>
-            <p className="SingleArticle__author">{singleArticle.author}</p>{" "}
+            <p className="SingleArticle__author">
+              <Link to={`/user/${singleArticle.author}`}>
+                {singleArticle.author}
+              </Link>
+            </p>{" "}
             <p className="SingleArticle__date">{createdDate.toUTCString()}</p>
             <p className="SingleArticle__body">{singleArticle.body}</p>
             <div className="CommentVote__Div">
