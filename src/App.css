@@ -69,6 +69,10 @@ main {
   margin: 0 5px 0 20px;
 }
 
+.pp__Nav:hover {
+  color: rgb(113, 255, 255);
+}
+
 .popover__Div {
   margin: 20px 40px;
   display: flex;
@@ -213,6 +217,11 @@ ul {
   font-weight: bold;
 }
 
+.SingleArticle__topic:hover,
+.SingleArticle__author:hover {
+  text-decoration: underline;
+}
+
 button i {
   font-size: 1rem;
 }
@@ -353,11 +362,38 @@ button i {
   color: #61dafb;
 }
 
+.User__Div {
+  margin: 20px;
+}
+
+.User__img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border: 1px solid grey;
+  font-size: 8px;
+  margin-top: 10px;
+}
+
+.Username__p {
+  font-weight: bold;
+  padding: 0;
+  margin: 10px 0 5px 0;
+}
+
+.UserFullName__p {
+  margin: 0;
+}
+
 .ErrorSection {
   margin: auto;
   border: 1px solid #777a83;
   background-color: #fffff5;
   padding: 15px;
+}
+
+.ErrorSection h2 {
+  margin: 10px 0;
 }
 
 .Error__HomeLink {
