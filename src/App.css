@@ -151,11 +151,13 @@ ul {
 
 .ArticleCard {
   text-align: left;
-  border: 1px solid grey;
   background-color: #fffff5;
   padding: 0 15px 10px;
   display: flex;
   justify-content: stretch;
+  outline: 1px solid grey;
+  margin-top: 1px;
+  margin-left: 1px;
 }
 
 .ArticleCard:hover div h2 {
@@ -368,6 +370,10 @@ button i {
   color: #61dafb;
 }
 
+.userPage__section {
+  flex-grow: 1;
+}
+
 .User__Div {
   margin: 20px;
 }
@@ -381,14 +387,16 @@ button i {
   margin-top: 10px;
 }
 
-.Username__p {
+.Username__h1 {
   font-weight: bold;
   padding: 0;
   margin: 10px 0 5px 0;
+  /* font-size: 1rem; */
 }
 
 .UserFullName__p {
   margin: 0;
+  font-size: 1.5rem;
 }
 
 .ErrorSection {
