@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getArticlesByUser, getUserByUsername } from "../utils/api";
-import ArticleCard from "./ArticleCard";
+import { DefaultUserContext } from "../contexts/DefaultUser";
+import { useContext } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import ArticlesList from "./ArticlesList";
 
 const UserArticlesList = () => {
-  const [articles, setArticles] = useState([]);
+  const [userArticles, setUserArticles] = useState([]);
+  const [authorArticlesTotal, setAuthorArticlesTotal] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [error, setError] = useState({
     status: null,
     msg: "",
   });
 
   const { author } = useParams();
+  const { user } = useContext(DefaultUserContext);
+  const loggedinUser = user.username;
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,8 +32,9 @@ const UserArticlesList = () => {
     const userArticlesFromAPI = getArticlesByUser(author);
     Promise.all([userInfoFromApi, userArticlesFromAPI])
       .then(([userInfoFromApi, userArticlesFromAPI]) => {
-        setUser(userInfoFromApi);
-        setArticles(userArticlesFromAPI);
+        setUserInfo(userInfoFromApi);
+        setUserArticles(userArticlesFromAPI);
+        setAuthorArticlesTotal(userArticlesFromAPI[0].total_count);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -60,28 +66,43 @@ const UserArticlesList = () => {
           </div>
         </section>
       ) : (
-        <div>
+        <section className="userPage__section">
           <div className="User__Div">
-            <img
-              className="User__img"
-              src={user.avatar_url}
-              alt="user profile pic"
-            ></img>
-
-            <p className="Username__p">{user.username}</p>
-            <p className="UserFullName__p">{user.name}</p>
+            {userInfo.avatar_url === undefined ? null : (
+              <img
+                className="User__img"
+                src={userInfo.avatar_url}
+                alt="user profile pic"
+              ></img>
+            )}
+            <h1 className="Username__h1">{userInfo.username}</h1>
+            <p className="UserFullName__p">{userInfo.name}</p>
           </div>
-          <h1>Articles by {author}</h1>
-          {articles.length === 0 ? (
-            <p>Looks like {user.username} hasn't posted any articles yet!</p>
+          {author === loggedinUser ? (
+            <>
+              {authorArticlesTotal ===
+              undefined ? null : authorArticlesTotal === 0 ? (
+                <h2>Looks like you haven't posted any articles yet!</h2>
+              ) : (
+                <h2 className="LoggedInUserArticles__h2">Articles by you</h2>
+              )}
+            </>
           ) : (
-            <ul className="ArticleList">
-              {articles.map((article) => (
-                <ArticleCard key={article.article_id} article={article} />
-              ))}
-            </ul>
+            <>
+              {authorArticlesTotal ===
+              undefined ? null : authorArticlesTotal === 0 ? (
+                <h2>Looks like {author} hasn't posted any articles yet!</h2>
+              ) : (
+                <h2>Articles by {author}</h2>
+              )}
+            </>
           )}
-        </div>
+          <ArticlesList
+            author={author}
+            userArticles={userArticles}
+            authorArticlesTotal={authorArticlesTotal}
+          />
+        </section>
       )}
     </>
   );
