@@ -70,7 +70,9 @@ main {
 }
 
 .pp__Nav:hover {
-  color: rgb(113, 255, 255);
+  /* color: rgba(113, 255, 255, 0.9);
+   */
+  color: rgb(246, 186, 73);
 }
 
 .popover__Div {
@@ -270,6 +272,10 @@ button i {
 
 .CommentCard__infoDiv {
   padding: 0 0 0 15px;
+}
+
+.CommentCardAuthor__p:hover {
+  text-decoration: underline;
 }
 
 .Votes__div {
