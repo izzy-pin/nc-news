@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getArticleByArticleId } from "../../utils/api";
+import { capitaliseStr, getArticleByArticleId } from "../../utils/api";
 import CommentList from "./Comment/CommentList";
 import PostComment from "./Comment/PostComment";
 import Votes from "./Votes";
@@ -27,6 +27,7 @@ const SingleArticlePage = () => {
     });
     getArticleByArticleId(article_id)
       .then((articleFromApi) => {
+        articleFromApi.topic = capitaliseStr(articleFromApi.topic);
         setSingleArticle(articleFromApi);
         setIsLoading(false);
         setCommentCount(articleFromApi.comment_count);
