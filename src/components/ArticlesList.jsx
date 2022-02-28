@@ -93,6 +93,7 @@ const ArticlesList = ({ author, setAuthorArticlesTotal }) => {
                 sort_by={sort_by}
                 setOrder={setOrder}
                 order={order}
+                setP={setP}
               />
 
               <ul className="ArticleList">

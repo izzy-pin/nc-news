@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SortBy = ({ setSort_by, sort_by, setOrder, order }) => {
+const SortBy = ({ setSort_by, sort_by, setOrder, order, setP }) => {
   const [sortByValue, setSortByValue] = useState(sort_by);
   const [orderValue, setOrderValue] = useState(order);
 
@@ -16,6 +16,7 @@ const SortBy = ({ setSort_by, sort_by, setOrder, order }) => {
     event.preventDefault();
     setSort_by(sortByValue);
     setOrder(orderValue);
+    setP(1);
   };
   return (
     <section className="SortBy__Section">
