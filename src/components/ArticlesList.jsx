@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { capitaliseStr, getArticles } from "../utils/api";
+import { capitaliseStr, getArticles, getArticlesByUser } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import LoadingSpinner from "./LoadingSpinner";
 import SortBy from "./SortBy";
 
 const PAGE_LENGTH = 10;
 
-const ArticlesList = ({ author, userArticles, authorArticlesTotal }) => {
+const ArticlesList = ({ author, setAuthorArticlesTotal }) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({
@@ -37,9 +37,14 @@ const ArticlesList = ({ author, userArticles, authorArticlesTotal }) => {
     });
 
     if (author) {
-      setIsLoading(false);
-      setArticles(userArticles);
-      setTotal_count(authorArticlesTotal);
+      getArticlesByUser(author, sort_by, order, p).then(
+        (userArticlesFromApi) => {
+          setIsLoading(false);
+          setArticles(userArticlesFromApi);
+          setTotal_count(userArticlesFromApi[0].total_count);
+          setAuthorArticlesTotal(userArticlesFromApi[0].total_count);
+        }
+      );
     } else {
       getArticles(topic, sort_by, order, p)
         .then((articlesFromApi) => {
@@ -55,14 +60,14 @@ const ArticlesList = ({ author, userArticles, authorArticlesTotal }) => {
           });
         });
     }
-  }, [topic, sort_by, order, p, author, authorArticlesTotal, userArticles]);
+  }, [topic, sort_by, order, p, author, setAuthorArticlesTotal]);
 
   return (
     <main>
       {author ? null : <h1>{topic ? capitaliseStr(topic) : "All topics"} </h1>}
       {isLoading ? (
         <section className="Loading__section">
-          <p>*shuffling news papers...*</p>
+          <p>*shuffling newspapers...*</p>
           <LoadingSpinner />
         </section>
       ) : error.status ? (
@@ -79,48 +84,51 @@ const ArticlesList = ({ author, userArticles, authorArticlesTotal }) => {
         </section>
       ) : (
         <section className="ArticlesList__Section">
-          <SortBy
-            setSort_by={setSort_by}
-            sort_by={sort_by}
-            setOrder={setOrder}
-            order={order}
-          />
-          <ul className="ArticleList">
-            {articles.map((article) => (
-              <ArticleCard key={article.article_id} article={article} />
-            ))}
-          </ul>
-          <div className="Paginate__Div">
-            <button
-              className="Paginate__button"
-              onClick={() => {
-                setP((currentPage) => currentPage - 1);
-              }}
-              disabled={p - 1 === 0}
-            >
-              Prev
-            </button>
-            <button
-              className="Paginate__button"
-              onClick={() => {
-                setP((currentPage) => currentPage + 1);
-              }}
-              disabled={PAGE_LENGTH * p >= total_count}
-            >
-              Next
-            </button>
-            {p - 1 === 0 && PAGE_LENGTH * p >= total_count ? (
-              <p>
-                Showing {total_count} of {total_count} articles
-              </p>
-            ) : (
-              <p>
-                Showing {p === 1 ? p : 1 + (p - 1) * 10} -{" "}
-                {PAGE_LENGTH * p <= total_count ? PAGE_LENGTH * p : total_count}{" "}
-                of {total_count} articles
-              </p>
-            )}
-          </div>
+          {total_count === 0 ? (
+            <p>Sorry, no articles here (yet)</p>
+          ) : (
+            <>
+              <SortBy
+                setSort_by={setSort_by}
+                sort_by={sort_by}
+                setOrder={setOrder}
+                order={order}
+              />
+
+              <ul className="ArticleList">
+                {articles.map((article) => (
+                  <ArticleCard key={article.article_id} article={article} />
+                ))}
+              </ul>
+              <div className="Paginate__Div">
+                <button
+                  className="Paginate__button"
+                  onClick={() => {
+                    setP((currentPage) => currentPage - 1);
+                  }}
+                  disabled={p - 1 === 0}
+                >
+                  Prev
+                </button>
+                <button
+                  className="Paginate__button"
+                  onClick={() => {
+                    setP((currentPage) => currentPage + 1);
+                  }}
+                  disabled={PAGE_LENGTH * p >= total_count}
+                >
+                  Next
+                </button>
+                <p>
+                  Showing {p === 1 ? p : 1 + (p - 1) * 10} -{" "}
+                  {PAGE_LENGTH * p <= total_count
+                    ? PAGE_LENGTH * p
+                    : total_count}{" "}
+                  of {total_count} articles
+                </p>
+              </div>
+            </>
+          )}
         </section>
       )}
     </main>

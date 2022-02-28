@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getArticlesByUser, getUserByUsername } from "../utils/api";
+import { getUserByUsername } from "../utils/api";
 import { DefaultUserContext } from "../contexts/DefaultUser";
 import { useContext } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import ArticlesList from "./ArticlesList";
 
 const UserProfilePage = () => {
-  const [userArticles, setUserArticles] = useState([]);
   const [authorArticlesTotal, setAuthorArticlesTotal] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
@@ -16,11 +15,14 @@ const UserProfilePage = () => {
     msg: "",
   });
 
+  const [didMount, setDidMount] = useState(false);
+
   const { author } = useParams();
   const { user } = useContext(DefaultUserContext);
   const loggedinUser = user.username;
 
   useEffect(() => {
+    setDidMount(true);
     setIsLoading(true);
     setError(() => {
       return {
@@ -28,13 +30,10 @@ const UserProfilePage = () => {
         msg: "",
       };
     });
-    const userInfoFromApi = getUserByUsername(author);
-    const userArticlesFromAPI = getArticlesByUser(author);
-    Promise.all([userInfoFromApi, userArticlesFromAPI])
-      .then(([userInfoFromApi, userArticlesFromAPI]) => {
+
+    getUserByUsername(author)
+      .then((userInfoFromApi) => {
         setUserInfo(userInfoFromApi);
-        setUserArticles(userArticlesFromAPI);
-        setAuthorArticlesTotal(userArticlesFromAPI[0].total_count);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -44,10 +43,17 @@ const UserProfilePage = () => {
           msg: err.response.data.msg,
         });
       });
+
+    //runs when component is unmounted
+    return () => setDidMount(false);
   }, [author]);
 
+  if (!didMount) {
+    return null;
+  }
+
   return (
-    <>
+    <main>
       {isLoading ? (
         <section className="Loading__section">
           <p>*finding user...*</p>
@@ -82,7 +88,7 @@ const UserProfilePage = () => {
             <>
               {authorArticlesTotal ===
               undefined ? null : authorArticlesTotal === 0 ? (
-                <h2>Looks like you haven't posted any articles yet!</h2>
+                <h2>Looks like you haven't posted any articles!</h2>
               ) : (
                 <h2 className="LoggedInUserArticles__h2">Articles by you</h2>
               )}
@@ -91,7 +97,7 @@ const UserProfilePage = () => {
             <>
               {authorArticlesTotal ===
               undefined ? null : authorArticlesTotal === 0 ? (
-                <h2>Looks like {author} hasn't posted any articles yet!</h2>
+                <h2>Looks like {author} hasn't posted any articles!</h2>
               ) : (
                 <h2>Articles by {author}</h2>
               )}
@@ -99,12 +105,11 @@ const UserProfilePage = () => {
           )}
           <ArticlesList
             author={author}
-            userArticles={userArticles}
-            authorArticlesTotal={authorArticlesTotal}
+            setAuthorArticlesTotal={setAuthorArticlesTotal}
           />
         </section>
       )}
-    </>
+    </main>
   );
 };
 
