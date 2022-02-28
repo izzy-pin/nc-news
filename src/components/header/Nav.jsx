@@ -71,13 +71,21 @@ const Nav = () => {
           ))
         )}
 
-        <i
-          className="fas fa-user pp__Nav"
-          aria-owns={open ? "mouse-over-popover" : undefined}
-          aria-haspopup="true"
-          onMouseEnter={handlePopoverOpen}
-          onMouseLeave={handlePopoverClose}
-        ></i>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "NavLink NavLink__Active" : "NavLink"
+          }
+          to={`/user/${user.username}`}
+        >
+          <i
+            className="fa fa-user pp__Nav"
+            aria-owns={open ? "mouse-over-popover" : undefined}
+            aria-haspopup="true"
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
+          ></i>
+        </NavLink>
+
         <Popover
           id="mouse-over-popover"
           sx={{

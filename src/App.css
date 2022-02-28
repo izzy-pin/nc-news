@@ -69,6 +69,12 @@ main {
   margin: 0 5px 0 20px;
 }
 
+.pp__Nav:hover {
+  /* color: rgba(113, 255, 255, 0.9);
+   */
+  color: rgb(246, 186, 73);
+}
+
 .popover__Div {
   margin: 20px 40px;
   display: flex;
@@ -145,11 +151,13 @@ ul {
 
 .ArticleCard {
   text-align: left;
-  border: 1px solid grey;
   background-color: #fffff5;
   padding: 0 15px 10px;
   display: flex;
   justify-content: stretch;
+  outline: 1px solid grey;
+  margin-top: 1px;
+  margin-left: 1px;
 }
 
 .ArticleCard:hover div h2 {
@@ -213,6 +221,11 @@ ul {
   font-weight: bold;
 }
 
+.SingleArticle__topic:hover,
+.SingleArticle__author:hover {
+  text-decoration: underline;
+}
+
 button i {
   font-size: 1rem;
 }
@@ -261,6 +274,10 @@ button i {
 
 .CommentCard__infoDiv {
   padding: 0 0 0 15px;
+}
+
+.CommentCardAuthor__p:hover {
+  text-decoration: underline;
 }
 
 .Votes__div {
@@ -353,11 +370,44 @@ button i {
   color: #61dafb;
 }
 
+.userPage__section {
+  flex-grow: 1;
+}
+
+.User__Div {
+  margin: 20px;
+}
+
+.User__img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border: 1px solid grey;
+  font-size: 8px;
+  margin-top: 10px;
+}
+
+.Username__h1 {
+  font-weight: bold;
+  padding: 0;
+  margin: 10px 0 5px 0;
+  /* font-size: 1rem; */
+}
+
+.UserFullName__p {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
 .ErrorSection {
   margin: auto;
   border: 1px solid #777a83;
   background-color: #fffff5;
   padding: 15px;
+}
+
+.ErrorSection h2 {
+  margin: 10px 0;
 }
 
 .Error__HomeLink {

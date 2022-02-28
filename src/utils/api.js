@@ -26,6 +26,16 @@ export const getArticleByArticleId = (article_id) => {
   });
 };
 
+export const getArticlesByUser = (author, sort_by, order, p) => {
+  return newsRnApi
+    .get("/articles", {
+      params: { author, sort_by, order, p },
+    })
+    .then((res) => {
+      return res.data.articles;
+    });
+};
+
 export const getComments = (article_id) => {
   return newsRnApi.get(`/articles/${article_id}/comments`).then((res) => {
     return res.data.comments;

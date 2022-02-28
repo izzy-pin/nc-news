@@ -2,13 +2,19 @@
 
 ## What's it about?
 
-news rn is a social news and discussion site built using React.
+news right now is a social news and discussion site built using React.
 
-Currently, the site has a default "logged in" user that can up and down vote articles and comments and also post and delete their own comments.
+- news rn's articles can be by filtered by topic and can be sorted by date created and user engagement - by like and comment count.
+- Users can navigate through the available articles using pagination.
+- Each article has user curated ratings and its own commments section.
 
-news rn's articles are divided into topics. Users can sort topics by date created and popularity and can use pagination to navigate through a topic's available articles. Each article has user curated ratings and can be up or down voted and has its own commments section.
+- Currently, the site has a default "logged in" user, indicated by the user icon in the navbar. Hovering over this icon will display some of this user's info such as their username and profile picture and clicking this icon will show their full profile.
 
-I have tried to build the app's components with scalability in mind, and its structure / functionality will change as I continue to improve and refactor it.
+- The "logged in" user can up and down vote articles and comments and also post and delete their own comments.
+
+- Users can click on another user's username on an article page or in the comments section and be taken to their profile page where they can also view a list of all the articles that user has posted.
+
+I have tried to build the app's components with scalability in mind, and its structure / functionality will change as I continue to refactor and expand it.
 
 ## Front-end
 
