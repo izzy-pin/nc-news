@@ -6,7 +6,7 @@ import { useContext } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import ArticlesList from "./ArticlesList";
 
-const UserArticlesList = () => {
+const UserProfilePage = () => {
   const [userArticles, setUserArticles] = useState([]);
   const [authorArticlesTotal, setAuthorArticlesTotal] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
@@ -108,4 +108,4 @@ const UserArticlesList = () => {
   );
 };
 
-export default UserArticlesList;
+export default UserProfilePage;

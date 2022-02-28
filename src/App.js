@@ -6,7 +6,7 @@ import SingleArticle from "./components/ArticlePage/SingleArticlePage";
 import Footer from "./components/Footer";
 import CommentList from "./components/ArticlePage/Comment/CommentList";
 import ErrorPage from "./components/ErrorPage";
-import UserArticlesList from "./components/UserArticlesList";
+import UserProfilePage from "./components/UserProfilePage";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             path="articles/:article_id/comments"
             element={<CommentList />}
           />
-          <Route path="/user/:author/" element={<UserArticlesList />} />
+          <Route path="/user/:author/" element={<UserProfilePage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
