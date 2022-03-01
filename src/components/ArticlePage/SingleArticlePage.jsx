@@ -30,7 +30,7 @@ const SingleArticlePage = () => {
         articleFromApi.topic = capitaliseStr(articleFromApi.topic);
         setSingleArticle(articleFromApi);
         setIsLoading(false);
-        setCommentCount(articleFromApi.comment_count);
+        setCommentCount(+articleFromApi.comment_count);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -96,6 +96,7 @@ const SingleArticlePage = () => {
             comments={comments}
             setComments={setComments}
             setCommentCount={setCommentCount}
+            commentCount={commentCount}
           />
         </main>
       )}
