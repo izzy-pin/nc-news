@@ -36,10 +36,14 @@ export const getArticlesByUser = (author, sort_by, order, p) => {
     });
 };
 
-export const getComments = (article_id) => {
-  return newsRnApi.get(`/articles/${article_id}/comments`).then((res) => {
-    return res.data.comments;
-  });
+export const getComments = (article_id, p = 1) => {
+  return newsRnApi
+    .get(`/articles/${article_id}/comments`, {
+      params: { p },
+    })
+    .then((res) => {
+      return res.data.comments;
+    });
 };
 
 export const patchVote = (id, inc, componentPath) => {
