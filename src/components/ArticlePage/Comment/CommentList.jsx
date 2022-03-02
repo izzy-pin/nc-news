@@ -12,7 +12,12 @@ const CommentList = ({
 }) => {
   const { article_id } = useParams();
 
-  const [error, setError] = useState({ status: null, msg: "" });
+  const [error, setError] = useState({
+    comments: false,
+    loadMoreComments: false,
+    status: null,
+    msg: "",
+  });
   const [isLoading, setIsLoading] = useState({
     initialComments: false,
     moreComments: false,
@@ -26,6 +31,14 @@ const CommentList = ({
     setIsLoading((currLoading) => {
       return { ...currLoading, moreComments: true };
     });
+    setError(() => {
+      return {
+        comments: false,
+        loadMoreComments: false,
+        status: null,
+        msg: "",
+      };
+    });
     getComments(article_id, nextPage)
       .then((nextPageofComments) => {
         setComments((currComments) => {
@@ -37,15 +50,17 @@ const CommentList = ({
           }
           return [...currComments, ...nextPageofComments];
         });
-        setNextPage((currNextPage) => currNextPage++);
+        setNextPage((currNextPage) => currNextPage + 1);
         setIsLoading((currLoading) => {
           return { ...currLoading, moreComments: false };
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setIsLoading((currLoading) => {
           return { ...currLoading, moreComments: false };
+        });
+        setError((currErr) => {
+          return { ...currErr, loadMoreComments: true };
         });
       });
   };
@@ -63,8 +78,10 @@ const CommentList = ({
       return { ...currLoading, initialComments: true };
     });
 
-    setError((currentError) => {
+    setError(() => {
       return {
+        comments: false,
+        loadMoreComments: false,
         status: null,
         msg: "",
       };
@@ -85,7 +102,14 @@ const CommentList = ({
         setIsLoading((currLoading) => {
           return { ...currLoading, initialComments: false };
         });
-        setError({ status: err.response.status, msg: err.response.data.msg });
+        setError((currErr) => {
+          return {
+            ...currErr,
+            comments: true,
+            status: err.response.status,
+            msg: err.response.data.msg,
+          };
+        });
       });
 
     return () => {
@@ -100,11 +124,9 @@ const CommentList = ({
           <LoadingSpinner />
         </>
       ) : error.status ? (
-        <section className="ErrorSection">
-          <p>Sorry, there was an error :( </p>
-          <p>
-            {error.status}, {error.msg}
-          </p>
+        <section className="Comments__Section__Error">
+          <p>Sorry, there was an error loading comments :( </p>
+          <p>Please try again later</p>
         </section>
       ) : (
         <>
@@ -120,14 +142,22 @@ const CommentList = ({
               );
             })}
           </ul>
+          {error.loadMoreComments ? (
+            <>
+              <p>Sorry, there was a problem loading more comments</p>
+              <p>Please try again later</p>
+            </>
+          ) : null}
           {isLoading.moreComments ? <LoadingSpinner /> : null}
-          <button
-            className="LoadComments__button"
-            onClick={handleLoadMoreClick}
-            disabled={loadMoreComments === false}
-          >
-            {loadMoreComments === false ? "All Comments Loaded" : "Load More"}
-          </button>
+          {error.loadMoreComments ? null : (
+            <button
+              className="LoadComments__button"
+              onClick={handleLoadMoreClick}
+              disabled={loadMoreComments === false}
+            >
+              {loadMoreComments === false ? "All Comments Loaded" : "Load More"}
+            </button>
+          )}
         </>
       )}
     </section>
