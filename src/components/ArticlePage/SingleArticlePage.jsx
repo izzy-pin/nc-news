@@ -8,6 +8,7 @@ import LoadingSpinner from "../LoadingSpinner";
 
 const SingleArticlePage = () => {
   const [singleArticle, setSingleArticle] = useState({});
+  const [topic, setTopic] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ status: null, msg: "" });
   const [comments, setComments] = useState([]);
@@ -27,7 +28,7 @@ const SingleArticlePage = () => {
     });
     getArticleByArticleId(article_id)
       .then((articleFromApi) => {
-        articleFromApi.topic = capitaliseStr(articleFromApi.topic);
+        setTopic(capitaliseStr(articleFromApi.topic));
         setSingleArticle(articleFromApi);
         setIsLoading(false);
         setCommentCount(+articleFromApi.comment_count);
@@ -64,9 +65,7 @@ const SingleArticlePage = () => {
         <main className="SingleArticle__main">
           <article className="SingleArticle__article">
             <p className="SingleArticle__topic">
-              <Link to={`/topics/${singleArticle.topic}`}>
-                {singleArticle.topic}
-              </Link>
+              <Link to={`/topics/${singleArticle.topic}`}>{topic}</Link>
             </p>
             <h1 className="SingleArticle__title">{singleArticle.title}</h1>
             <p className="SingleArticle__author">
