@@ -36,10 +36,10 @@ export const getArticlesByUser = (author, sort_by, order, p) => {
     });
 };
 
-export const getComments = (article_id, p = 1) => {
+export const getComments = (article_id, p = 1, limit = 10) => {
   return newsRnApi
     .get(`/articles/${article_id}/comments`, {
-      params: { p },
+      params: { p, limit },
     })
     .then((res) => {
       return res.data.comments;

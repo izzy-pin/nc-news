@@ -22,60 +22,27 @@ const CommentList = ({
     initialComments: false,
     moreComments: false,
   });
+
   const [deletedComment, setDeletedComment] = useState(undefined);
-
-  const [nextPage, setNextPage] = useState(2);
-  const [loadMoreComments, setLoadMoreComments] = useState(true);
-
-  const loadNextPageOfComments = (article_id, nextPage) => {
-    setIsLoading((currLoading) => {
-      return { ...currLoading, moreComments: true };
-    });
-    setError(() => {
-      return {
-        comments: false,
-        loadMoreComments: false,
-        status: null,
-        msg: "",
-      };
-    });
-    getComments(article_id, nextPage)
-      .then((nextPageofComments) => {
-        setComments((currComments) => {
-          if (
-            currComments.length + nextPageofComments.length ===
-            commentCount
-          ) {
-            setLoadMoreComments(false);
-          }
-          return [...currComments, ...nextPageofComments];
-        });
-        setNextPage((currNextPage) => currNextPage + 1);
-        setIsLoading((currLoading) => {
-          return { ...currLoading, moreComments: false };
-        });
-      })
-      .catch(() => {
-        setIsLoading((currLoading) => {
-          return { ...currLoading, moreComments: false };
-        });
-        setError((currErr) => {
-          return { ...currErr, loadMoreComments: true };
-        });
-      });
-  };
+  const [nextPage, setNextPage] = useState({ page: 2, moreToLoad: true });
+  const [limit, setLimit] = useState(10);
+  const p = 1;
 
   const handleLoadMoreClick = () => {
-    if (loadMoreComments) {
-      loadNextPageOfComments(article_id, nextPage);
-    }
+    setLimit((currLimit) => {
+      return currLimit + 10;
+    });
   };
 
   useEffect(() => {
     let isMounted = true;
 
     setIsLoading((currLoading) => {
-      return { ...currLoading, initialComments: true };
+      if (limit === 10) {
+        return { ...currLoading, initialComments: true };
+      } else {
+        return { ...currLoading, moreComments: true };
+      }
     });
 
     setError(() => {
@@ -86,21 +53,30 @@ const CommentList = ({
         msg: "",
       };
     });
-    getComments(article_id)
+    getComments(article_id, p, limit)
       .then((commentsFromApi) => {
         if (isMounted) {
           setComments(commentsFromApi);
           setIsLoading((currLoading) => {
-            return { ...currLoading, initialComments: false };
+            if (limit === 10) {
+              return { ...currLoading, initialComments: false };
+            } else {
+              return { ...currLoading, moreComments: false };
+            }
           });
-          if (commentsFromApi.length === commentCount) {
-            setLoadMoreComments(false);
-          }
+          setNextPage((currNextPage) => {
+            const canLoad = limit <= commentCount;
+            return { ...currNextPage, moreToLoad: canLoad };
+          });
         }
       })
       .catch((err) => {
         setIsLoading((currLoading) => {
-          return { ...currLoading, initialComments: false };
+          if (limit === 10) {
+            return { ...currLoading, initialComments: false };
+          } else {
+            return { ...currLoading, moreComments: false };
+          }
         });
         setError((currErr) => {
           return {
@@ -115,14 +91,11 @@ const CommentList = ({
     return () => {
       isMounted = false;
     };
-  }, [article_id, setComments, deletedComment, commentCount]);
+  }, [article_id, setComments, commentCount, p, limit]);
   return (
     <section className="Comment__Section">
       {isLoading.initialComments ? (
-        <>
-          <p>Loading comment section</p>
-          <LoadingSpinner />
-        </>
+        <LoadingSpinner />
       ) : error.status ? (
         <section className="Comments__Section__Error">
           <p>Sorry, there was an error loading comments :( </p>
@@ -137,6 +110,7 @@ const CommentList = ({
                   key={comment.comment_id}
                   comment={comment}
                   setDeletedComment={setDeletedComment}
+                  deletedComment={deletedComment}
                   setCommentCount={setCommentCount}
                 />
               );
@@ -148,14 +122,15 @@ const CommentList = ({
               <p>Please try again later</p>
             </>
           ) : null}
-          {isLoading.moreComments ? <LoadingSpinner /> : null}
           {error.loadMoreComments ? null : (
             <button
               className="LoadComments__button"
               onClick={handleLoadMoreClick}
-              disabled={loadMoreComments === false}
+              disabled={nextPage.moreToLoad === false}
             >
-              {loadMoreComments === false ? "All Comments Loaded" : "Load More"}
+              {nextPage.moreToLoad === false
+                ? "All Comments Loaded"
+                : "Load More"}
             </button>
           )}
         </>
