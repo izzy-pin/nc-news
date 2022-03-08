@@ -75,3 +75,9 @@ export const deleteComment = (comment_id) => {
 export const capitaliseStr = (topic) => {
   return topic.charAt(0).toUpperCase() + topic.slice(1);
 };
+
+export const postArticle = (data) => {
+  return newsRnApi.post(`/articles`, data).then((res) => {
+    return res.data.article;
+  });
+};
