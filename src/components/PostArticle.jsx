@@ -2,13 +2,13 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { DefaultUserContext } from "../contexts/DefaultUser";
 import { postArticle } from "../utils/api";
+import LoadingSpinner from "./LoadingSpinner";
 
 const PostArticle = () => {
-  // on successfull submission, redirect to the article page or to the users profile to see it there?
-  // need state for each of the 3 inputs
   const { user } = useContext(DefaultUserContext);
   const [inputs, setInputs] = useState({ topic: "coding" });
   const [isError, setIsError] = useState({ status: null, msg: "" });
+  const [isLoading, setIsLoading] = useState(false);
   const [postedArticle, setPostedArticle] = useState({
     posted: false,
     article_id: null,
@@ -24,28 +24,36 @@ const PostArticle = () => {
     event.preventDefault();
     const data = { ...inputs, author: user.username };
     setIsError({ status: null, msg: "" });
+    setIsLoading(true);
     postArticle(data)
       .then((postedArticleFromApi) => {
         setPostedArticle({
           posted: true,
           article_id: postedArticleFromApi.article_id,
         });
+        setIsLoading(false);
       })
       .catch((err) => {
         setIsError({
           status: err.response.status,
           msg: err.response.data.msg,
         });
+        setIsLoading(false);
       });
   };
   return (
-    <>
-      {postedArticle.posted ? (
+    <section className="postArticle__section">
+      {isLoading ? (
+        <>
+          <p>*firing up the printing press...*</p>
+          <LoadingSpinner />
+        </>
+      ) : postedArticle.posted ? (
         <div>
           {" "}
-          <h1>Success</h1>
+          <h1>Success!</h1>
           <p>
-            Click to view your new article
+            View your new article{" "}
             <Link to={`/articles/${postedArticle.article_id}`}>here</Link>
           </p>
         </div>
@@ -59,7 +67,7 @@ const PostArticle = () => {
               name="topic"
               value={inputs.topic || "coding"}
               onChange={handleChange}
-              required
+              required={true}
             >
               <option value="coding">Coding</option>
               <option value="cooking">Cooking</option>
@@ -69,17 +77,22 @@ const PostArticle = () => {
             <input
               type="text"
               name="title"
+              placeholder="Title"
               value={inputs.title || ""}
               onChange={handleChange}
-              required
-            ></input>
-            <p>Body text input - text area?</p>
+              required={true}
+              maxLength="100"
+            />
+            <p>Article text - change to label?</p>
             <textarea
               onChange={handleChange}
               name="body"
+              type="text"
+              placeholder="Your article"
               value={inputs.body || ""}
-              required
-            ></textarea>
+              required={true}
+              maxLength="4000"
+            />
             <button>Post</button>
           </form>
 
@@ -90,7 +103,7 @@ const PostArticle = () => {
           )}
         </div>
       )}
-    </>
+    </section>
   );
 };
 
