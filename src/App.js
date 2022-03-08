@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ArticlesList from "./components/ArticlesList";
@@ -7,6 +8,7 @@ import Footer from "./components/Footer";
 import CommentList from "./components/ArticlePage/Comment/CommentList";
 import ErrorPage from "./components/ErrorPage";
 import UserProfilePage from "./components/UserProfilePage";
+import PostArticle from "./components/PostArticle";
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
             element={<CommentList />}
           />
           <Route path="/user/:author/" element={<UserProfilePage />} />
+          <Route path="post-article" element={<PostArticle />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
