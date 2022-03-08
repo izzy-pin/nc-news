@@ -93,16 +93,32 @@ main {
   font-weight: bold;
 }
 
-.Section__Date {
+.DatePost__Section {
   background-color: #282c34;
   min-height: 5vh;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: space-between;
   font-size: 1.5rem;
   color: white;
   padding: 7px 20px 0px;
   border-top: 1px solid whitesmoke;
+}
+
+.Date__p {
+  padding: 0;
+  margin: 0;
+}
+
+.postArticle__link {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.postArticle__link a,
+.postArticle__link a:active {
+  text-decoration: none;
+  color: white;
 }
 
 h1 {
@@ -201,6 +217,10 @@ ul {
 .SingleArticlePage__Section {
   margin: auto;
   justify-content: center;
+  width: 100vw;
+}
+.SingleArticle__article {
+  width: 100%;
 }
 
 .SingleArticle__title {
@@ -342,6 +362,10 @@ button i {
   border-color: rgba(119, 122, 131, 0.4);
   font-style: oblique;
   cursor: default;
+}
+
+.Comment__Section {
+  width: 100%;
 }
 
 .Paginate__Div {
@@ -531,11 +555,22 @@ footer a:hover {
 }
 
 @media screen and (min-width: 1024px) {
-  .SingleArticlePage__Section {
-    max-width: 1024px;
+  .SingleArticlePage__Section,
+  .PostComment__section,
+  .Comment__Section {
+    width: 1024px;
+    /* min-width: 1024px; */
   }
   .ArticleCard {
     width: 300px;
     flex: 0 1 auto;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .Nav,
+  .DatePost__Section {
+    padding-left: 7%;
+    padding-right: 7%;
   }
 }
