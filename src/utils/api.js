@@ -68,8 +68,8 @@ export const postComment = (article_id, data) => {
     });
 };
 
-export const deleteComment = (comment_id) => {
-  return newsRnApi.delete(`/comments/${comment_id}`);
+export const deleteItem = (component, id) => {
+  return newsRnApi.delete(`/${component}/${id}`);
 };
 
 export const capitaliseStr = (topic) => {

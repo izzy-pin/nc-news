@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deleteComment } from "../../../utils/api";
+import { deleteItem } from "../../../utils/api";
 
 const DeleteComment = ({ comment_id, setDeletedComment, setCommentCount }) => {
   const [isError, setIsError] = useState(false);
@@ -8,7 +8,7 @@ const DeleteComment = ({ comment_id, setDeletedComment, setCommentCount }) => {
     setIsError(false);
     setIsLoading(true);
     setCommentCount((currCount) => +currCount - 1);
-    deleteComment(comment_id)
+    deleteItem("comments", comment_id)
       .then(() => {
         setIsLoading(false);
         setDeletedComment(comment_id);
