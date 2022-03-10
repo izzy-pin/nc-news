@@ -227,13 +227,17 @@ ul {
   font-size: 2rem;
 }
 
-.SingleArticle__topic,
-.SingleArticle__body {
-  text-align: left;
+.linkDelete__div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .SingleArticle__body {
   line-height: 1.3;
-  padding: 10px 0;
+  padding: 10px;
+  text-align: justify;
+  white-space: pre-wrap;
 }
 
 .SingleArticle__topic,
@@ -428,23 +432,103 @@ button i {
   font-size: 1.5rem;
 }
 
-.ErrorSection {
+.postArticle__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 100vw;
+  /* change above here!!!! */
+}
+
+.postArticle__section h1 {
+  margin: 20px 0;
+}
+
+.postArticle__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  font-size: 1.2rem;
+
+  /* margin: 0;  */
+}
+
+.postArticle__form label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 5px;
+}
+
+.postArticle__input,
+.postArticle__select,
+.postArticle__textarea {
+  margin-top: 5px;
+  border: 1px solid #cccccc;
+  border-bottom: 1px solid #777a83;
+  padding: 3px;
+  font-size: 1rem;
+}
+
+.postArticle__textarea {
+  min-height: 250px;
+}
+
+.noCharsleft {
+  background-color: rgba(255, 93, 93, 0.2);
+}
+
+.inputChars__p {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: right;
+  font-size: 0.8rem;
+}
+
+.postArticle__button {
+  width: fit-content;
+  color: #fffff5;
+  background-color: #282c34;
+  border-radius: 20px;
+  border: 1px solid #282c34;
+  padding: 5px 10px 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 15px 0;
+}
+
+.postArticle__div__success a,
+.postArticle__div__success a:active {
+  text-decoration: solid;
+  font-weight: bold;
+}
+
+.Error__Section {
   margin: auto;
   border: 1px solid #777a83;
   background-color: #fffff5;
   padding: 15px;
+  width: fit-content;
 }
 
 .ErrorSection h2 {
   margin: 10px 0;
 }
 
-.Error__HomeLink {
+.Error__HomeLink,
+.Home__Link {
   padding: 10px 0;
   margin: 5px 0;
 }
 .Error__HomeLink a,
-.Error__HomeLink a:active {
+.Error__HomeLink a:active,
+.Home__Link a,
+.Home__Link a:active {
   text-decoration: none;
   color: #282c34;
   text-decoration: none;
@@ -547,6 +631,10 @@ footer a:hover {
     width: 250px;
     max-width: 50%;
     flex-grow: 1;
+  }
+
+  .postArticle__form {
+    max-width: 600px;
   }
 
   .PostComment_section {
