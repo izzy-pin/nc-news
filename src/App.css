@@ -38,7 +38,7 @@ main {
   justify-content: space-between;
   font-size: 1.8rem;
   color: white;
-  padding: 0 20px 0 20px;
+  padding: 0 5px;
 }
 
 .NavLink,
@@ -607,13 +607,6 @@ footer a:hover {
     font-size: 1.4rem;
   }
 
-  .Nav--TopicsDiv {
-    width: 100vw;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-
   footer {
     font-size: 1rem;
   }
@@ -624,6 +617,9 @@ footer a:hover {
 }
 
 @media screen and (min-width: 600px) {
+  .Nav {
+    padding: 0 20px;
+  }
   .ArticleList {
     display: flex;
     flex-wrap: wrap;
@@ -640,11 +636,11 @@ footer a:hover {
   }
 
   .postArticle__form {
-    max-width: 600px;
+    max-width: 700px;
   }
 
   .PostComment_section {
-    max-width: 600px;
+    max-width: 700px;
   }
 }
 
