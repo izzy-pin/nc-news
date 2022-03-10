@@ -70,8 +70,6 @@ main {
 }
 
 .pp__Nav:hover {
-  /* color: rgba(113, 255, 255, 0.9);
-   */
   color: rgb(246, 186, 73);
 }
 
@@ -99,9 +97,9 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: white;
-  padding: 7px 20px 0px;
+  padding: 7px 10px 0px;
   border-top: 1px solid whitesmoke;
 }
 
@@ -113,12 +111,11 @@ main {
 .postArticle__link {
   color: white;
   font-size: 1.5rem;
+  text-decoration: none;
 }
 
-.postArticle__link a,
-.postArticle__link a:active {
-  text-decoration: none;
-  color: white;
+.postArticle__link:hover {
+  color: rgb(246, 186, 73);
 }
 
 h1 {
@@ -424,7 +421,6 @@ button i {
   font-weight: bold;
   padding: 0;
   margin: 10px 0 5px 0;
-  /* font-size: 1rem; */
 }
 
 .UserFullName__p {
@@ -438,10 +434,13 @@ button i {
   align-items: center;
   margin: auto;
   width: 100vw;
-  /* change above here!!!! */
 }
 
-.postArticle__section h1 {
+.postArticle__div__success {
+  margin: auto;
+}
+
+.postArticle__main h1 {
   margin: 20px 0;
 }
 
@@ -452,8 +451,6 @@ button i {
   justify-content: center;
   width: 90%;
   font-size: 1.2rem;
-
-  /* margin: 0;  */
 }
 
 .postArticle__form label {
@@ -504,8 +501,13 @@ button i {
 
 .postArticle__div__success a,
 .postArticle__div__success a:active {
-  text-decoration: solid;
+  text-decoration: none;
   font-weight: bold;
+  color: #282c34;
+}
+
+.postArticle__div__success a:hover {
+  text-decoration: underline;
 }
 
 .Error__Section {
@@ -633,6 +635,10 @@ footer a:hover {
     flex-grow: 1;
   }
 
+  .DatePost__Section {
+    padding: 7px 20px 0px;
+  }
+
   .postArticle__form {
     max-width: 600px;
   }
@@ -647,7 +653,6 @@ footer a:hover {
   .PostComment__section,
   .Comment__Section {
     width: 1024px;
-    /* min-width: 1024px; */
   }
   .ArticleCard {
     width: 300px;
