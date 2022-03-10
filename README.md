@@ -10,7 +10,7 @@ news right now is a social news and discussion site built using React.
 
 - Currently, the site has a default "logged in" user, indicated by the user icon in the navbar. Hovering over this icon will display some of this user's info such as their username and profile picture and clicking this icon will show their full profile.
 
-- The "logged in" user can up and down vote articles and comments and also post and delete their own comments.
+- The "logged in" user can up and down vote articles and comments and also post and delete their own articles and comments.
 
 - Users can click on another user's username on an article page or in the comments section and be taken to their profile page where they can also view a list of all the articles that user has posted.
 
