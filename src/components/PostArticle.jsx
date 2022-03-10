@@ -6,7 +6,11 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const PostArticle = () => {
   const { user } = useContext(DefaultUserContext);
-  const [inputs, setInputs] = useState({ topic: "coding" });
+  const [inputs, setInputs] = useState({
+    topic: "coding",
+    title: "",
+    body: "",
+  });
   const [isError, setIsError] = useState({ status: null, msg: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [postedArticle, setPostedArticle] = useState({
@@ -42,14 +46,14 @@ const PostArticle = () => {
       });
   };
   return (
-    <section className="postArticle__section">
+    <main className="postArticle__main">
       {isLoading ? (
         <>
           <p>*firing up the printing press...*</p>
           <LoadingSpinner />
         </>
       ) : postedArticle.posted ? (
-        <div>
+        <div className="postArticle__div__success">
           {" "}
           <h1>Success!</h1>
           <p>
@@ -58,42 +62,66 @@ const PostArticle = () => {
           </p>
         </div>
       ) : (
-        <div>
+        <>
           <h1> Post an article</h1>
-          <form onSubmit={handleSubmit}>
-            <p>Select your topic</p>
-            <select
-              aria-label="choose topic"
-              name="topic"
-              value={inputs.topic || "coding"}
-              onChange={handleChange}
-              required={true}
-            >
-              <option value="coding">Coding</option>
-              <option value="cooking">Cooking</option>
-              <option value="football"> Football</option>
-            </select>
-            <p>Title</p>
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={inputs.title || ""}
-              onChange={handleChange}
-              required={true}
-              maxLength="100"
-            />
-            <p>Article text - change to label?</p>
-            <textarea
-              onChange={handleChange}
-              name="body"
-              type="text"
-              placeholder="Your article"
-              value={inputs.body || ""}
-              required={true}
-              maxLength="4000"
-            />
-            <button>Post</button>
+          <form className="postArticle__form" onSubmit={handleSubmit}>
+            <label>
+              Choose a topic
+              <select
+                aria-label="choose topic"
+                name="topic"
+                value={inputs.topic || "coding"}
+                onChange={handleChange}
+                required={true}
+                className="postArticle__select"
+              >
+                <option value="coding">Coding</option>
+                <option value="cooking">Cooking</option>
+                <option value="football"> Football</option>
+              </select>
+            </label>
+
+            <label>
+              Title
+              <input
+                type="text"
+                name="title"
+                placeholder="Your title"
+                value={inputs.title || ""}
+                onChange={handleChange}
+                required={true}
+                maxLength="100"
+                className={
+                  100 - inputs.title.length > 0
+                    ? "postArticle__input"
+                    : "postArticle__input noCharsleft"
+                }
+              />
+            </label>
+            <p className="inputChars__p">
+              {100 - inputs.title.length}/100 characters remaining
+            </p>
+            <label>
+              Article
+              <textarea
+                onChange={handleChange}
+                name="body"
+                type="text"
+                placeholder="Tell us more..."
+                value={inputs.body || ""}
+                required={true}
+                maxLength="4000"
+                className={
+                  4000 - inputs.body.length > 0
+                    ? "postArticle__textarea"
+                    : "postArticle__textarea noCharsleft"
+                }
+              />
+            </label>
+            <p className="inputChars__p">
+              {4000 - inputs.body.length}/4000 characters remaining
+            </p>
+            <button className="postArticle__button">Post</button>
           </form>
 
           {isError.status === null ? null : (
@@ -101,9 +129,9 @@ const PostArticle = () => {
               Status : {isError.status}, error: {isError.msg}{" "}
             </p>
           )}
-        </div>
+        </>
       )}
-    </section>
+    </main>
   );
 };
 
