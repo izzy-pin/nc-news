@@ -23,7 +23,11 @@ const Header = () => {
           {currentDate.toLocaleDateString("en-uk", options)}
         </p>
         {user.username === "tickle122" ? (
-          <Link className="postArticle__link" to="post-article">
+          <Link
+            className="postArticle__link"
+            to="post-article"
+            aria-label="Post new article"
+          >
             <i className="fas fa-edit"></i>
           </Link>
         ) : null}
