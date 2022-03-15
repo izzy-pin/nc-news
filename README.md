@@ -6,7 +6,7 @@ news right now is a social news and discussion site built using React.
 
 - news rn's articles can be by filtered by topic and can be sorted by date created and user engagement - by like and comment count.
 - Users can navigate through the available articles using pagination.
-- Each article has user curated ratings and its own commments section.
+- Each article has user curated ratings and its own comments section.
 
 - Currently, the site has a default "logged in" user, indicated by the user icon in the navbar. Hovering over this icon will display some of this user's info such as their username and profile picture and clicking this icon will show their full profile.
 
