@@ -22,7 +22,7 @@ const Header = () => {
         <p className="Date__p">
           {currentDate.toLocaleDateString("en-uk", options)}
         </p>
-        {user.username === "tickle122" ? (
+        {user.username === "cooljmessy" ? (
           <Link
             className="postArticle__link"
             to="post-article"
